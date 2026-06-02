@@ -20,10 +20,10 @@ export default function Home() {
 
       {/* ── HEADER ── */}
       <header
-        className="flex items-center justify-between py-8 lg:py-6"
+        className="awa-header flex items-center justify-between py-8 lg:py-0"
         style={{
-          paddingLeft: "calc(2 / 46 * 100vw)",
-          paddingRight: "calc(3 / 46 * 100vw)",
+          paddingLeft: "calc(2 / 42 * 100vw)",
+          paddingRight: "calc(3 / 42 * 100vw)",
         }}
       >
         <Link href="/">
@@ -91,20 +91,14 @@ export default function Home() {
         <div className="awa-left-col">
 
           {/* Desktop: Title at top */}
-          <div className="hidden lg:block pt-4">
+          <div className="hidden lg:block awa-desktop-title">
             <h1 className="text-[#292929] font-medium tracking-[0.12em] leading-tight text-[1.3rem]">
               APPARENT<br />WIND<br />ACTIVITIES
             </h1>
           </div>
 
-          {/* Desktop: Spacer pushes text to bottom */}
-          <div
-            className="hidden lg:block flex-1"
-            style={{ minHeight: "calc(17 / 42 * 100vw * 6 / 5 * 0.45)" }}
-          />
-
-          {/* Desktop: Body text aligned to bottom of video */}
-          <div className="hidden lg:block space-y-0">
+          {/* Desktop: Body text — padding-top places it at row 13 from page top */}
+          <div className="hidden lg:block awa-desktop-text space-y-0">
             {[
               "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
               "Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",

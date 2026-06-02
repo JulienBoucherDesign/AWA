@@ -124,7 +124,15 @@
   }
 }
 
-/* ─── AWA 42-column grid (desktop) ────────────────────────────────
+/* ─── AWA row system (desktop) ─────────────────────────────────────
+   Total page height = 22 rows.
+   Video height      = 17/42 * 100vw * 6/5  (drives total height)
+   1 row             = video_height / 22
+   Navbar            = 1 row
+   Title + Video top = 3 rows from page top  → 2 rows below navbar
+   Text top          = 13 rows from page top → 12 rows below navbar
+   ──────────────────────────────────────────────────────────────────
+   42-column grid (desktop)
    col 1–2   : left margin
    col 3–19  : text (17 cols)
    col 20–22 : gap  (3 cols)
@@ -133,10 +141,21 @@
 ──────────────────────────────────────────────────────────────────── */
 
 @media (min-width: 1024px) {
+  /* 1 row unit in vw */
+  :root {
+    --awa-row: calc(17 / 42 * 100vw * 6 / 5 / 22);
+  }
+
+  .awa-header {
+    height: var(--awa-row);
+    display: flex;
+    align-items: center;
+  }
+
   .awa-section {
     display: grid;
     grid-template-columns: repeat(42, 1fr);
-    align-items: end;
+    align-items: start;
     width: 100%;
   }
 
@@ -144,11 +163,24 @@
     grid-column: 3 / 20;
     display: flex;
     flex-direction: column;
-    min-height: calc(17 / 42 * 100vw * 6 / 5);
+    /* full 22 rows minus the 1-row header */
+    min-height: calc(21 * var(--awa-row));
   }
 
+  /* Title: starts 2 rows below the navbar (3 rows from top − 1 navbar row) */
+  .awa-desktop-title {
+    padding-top: calc(2 * var(--awa-row));
+  }
+
+  /* Text: starts 12 rows below the navbar (13 rows from top − 1 navbar row) */
+  .awa-desktop-text {
+    padding-top: calc(12 * var(--awa-row));
+  }
+
+  /* Video: starts 2 rows below the navbar, same as title */
   .awa-video-col {
     grid-column: 23 / 40;
+    padding-top: calc(2 * var(--awa-row));
   }
 }
 
