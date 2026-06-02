@@ -292,8 +292,8 @@ export default function FerrariHypersail() {
 
             <div className="my-8 aspect-video bg-[#292929]/5 overflow-hidden rounded">
               <Image
-                src="/ferrari-hypersail-sketch-1.png"
-                alt="Ferrari Hypersail design sketches"
+                src="/ferrari-velarossa-sketch-1.jpg"
+                alt="Ferrari Hypersail design sketches - 1960s direction"
                 width={800}
                 height={450}
                 className="w-full h-full object-cover"
@@ -436,8 +436,8 @@ export default function FerrariHypersail() {
 
             <div className="my-8 aspect-video bg-[#292929]/5 overflow-hidden rounded">
               <Image
-                src="/ferrari-hypersail-concept.png"
-                alt="Ferrari Hypersail hull iterations"
+                src="/ferrari-velarossa-sketch-2.png"
+                alt="Ferrari Hypersail hull concept"
                 width={800}
                 height={450}
                 className="w-full h-full object-cover"
@@ -478,8 +478,8 @@ export default function FerrariHypersail() {
 
             <div className="my-8 aspect-video bg-[#292929]/5 overflow-hidden rounded">
               <Image
-                src="/ferrari-hypersail-wing.png"
-                alt="Ferrari Hypersail wing sail detail"
+                src="/ferrari-60s-inspired.jpeg"
+                alt="Ferrari Hypersail - 1960s inspired cockpit design"
                 width={800}
                 height={450}
                 className="w-full h-full object-cover"
