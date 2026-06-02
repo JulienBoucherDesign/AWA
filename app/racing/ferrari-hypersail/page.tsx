@@ -70,8 +70,8 @@ function MarginImage({
       if (!ref.current) return
       const rect = ref.current.getBoundingClientRect()
       const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2
-      // Parallax: image moves at 30% of the scroll offset relative to center
-      setOffsetY(centerOffset * 0.08)
+      // Parallax: image moves at 25% of the scroll offset relative to center
+      setOffsetY(centerOffset * 0.25)
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
     handleScroll()
