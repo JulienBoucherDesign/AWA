@@ -163,11 +163,11 @@
     height: var(--awa-row);
   }
 
-  /* Section = 21 rows tall, 42-col grid, items aligned to bottom */
+  /* Section = 21 rows tall, 42-col grid, items aligned to start */
   .awa-section {
     display: grid;
     grid-template-columns: repeat(42, 1fr);
-    align-items: end;          /* video aligns to the bottom */
+    align-items: start;
     height: calc(21 * var(--awa-row));
     width: 100%;
   }
