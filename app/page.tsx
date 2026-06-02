@@ -20,15 +20,15 @@ export default function Home() {
 
       {/* ── HEADER ── */}
       <header
-        className="flex items-center justify-between py-5 lg:py-6"
+        className="flex items-center justify-between py-8 lg:py-6"
         style={{
-          paddingLeft: "calc(2 / 42 * 100vw)",
-          paddingRight: "calc(3 / 42 * 100vw)",
+          paddingLeft: "calc(2 / 46 * 100vw)",
+          paddingRight: "calc(3 / 46 * 100vw)",
         }}
       >
         <Link href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/awa-icon.png" alt="AWA" className="h-5 w-auto lg:h-5" />
+          <img src="/awa-icon.png" alt="AWA" className="h-6 w-auto lg:h-5" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -44,12 +44,12 @@ export default function Home() {
           ))}
         </nav>
 
-        {/* Mobile Hamburger */}
+          {/* Mobile Hamburger */}
         <button
           className="lg:hidden text-[#292929]"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </header>
 
@@ -123,20 +123,19 @@ export default function Home() {
           </div>
 
           {/* Mobile: Title + Text side by side */}
-          <div className="lg:hidden awa-mobile-content">
+          <div className="lg:hidden awa-mobile-content pt-10 pb-6">
             <div className="awa-mobile-title">
-              <h1 className="text-[#292929] font-medium tracking-[0.12em] leading-tight text-sm">
+              <h1 className="text-[#292929] font-medium tracking-[0.08em] leading-tight text-[0.9rem]">
                 Apparent<br />Wind<br />Activities
               </h1>
             </div>
-            <div className="awa-mobile-text space-y-3">
+            <div className="awa-mobile-text space-y-4">
               {[
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-                "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
               ].map((para, i) => (
                 <p
                   key={i}
-                  className="text-black font-light italic text-xs leading-relaxed"
+                  className="text-[#292929] font-light italic text-[0.75rem] leading-relaxed text-justify"
                 >
                   {para}
                 </p>
