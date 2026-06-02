@@ -231,7 +231,7 @@ export default function FerrariHypersail() {
               boats that circumnavigate the globe and break records.
             </p>
 
-            <p className="text-sm font-light text-[#292929] leading-relaxed mb-12">
+            <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               But his work on the America's Cup
               had introduced a different frame of reference.
               The AC75 — a monohull that leaves the water —
@@ -239,6 +239,34 @@ export default function FerrariHypersail() {
               in serious offshore conditions was real.
               Not theoretical. Not experimental.
               Already happening, in increasingly demanding seas.
+            </p>
+
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+              <Image
+                src="/ferrari-foils-deck.png"
+                alt="Foil geometry and deck ergonomics study"
+                width={800}
+                height={450}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <p className="text-xs font-light italic text-[#292929]/50 mb-8">
+              Foil geometry study — exploring the range of motion and deck plan ergonomics.
+            </p>
+
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+              <Image
+                src="/ferrari-foils-studio.png"
+                alt="Ferrari Hypersail foiling configuration"
+                width={800}
+                height={450}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <p className="text-xs font-light italic text-[#292929]/50 mb-12">
+              Foiling configuration — T-foil system derived from AC75 principles.
             </p>
           </section>
 
