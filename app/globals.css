@@ -195,10 +195,22 @@
     right: 0;
   }
 
-  /* Video col: cols 23–39, align-self:end so it sits at the bottom */
+  /* Video col: cols 23–39
+     Starts at row 3 from page top = 2 rows from section top
+     Ends at row 22 = bottom of section → height = 21 - 2 = 19 rows */
   .awa-video-col {
     grid-column: 23 / 40;
-    align-self: end;
+    align-self: start;
+    padding-top: calc(2 * var(--awa-row));
+  }
+
+  /* Video element fills exactly 19 rows */
+  .awa-video-col video,
+  .awa-video-col .awa-video-inner {
+    height: calc(19 * var(--awa-row));
+    width: 100%;
+    display: block;
+    object-fit: cover;
   }
 }
 

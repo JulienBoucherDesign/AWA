@@ -141,7 +141,7 @@ export default function Home() {
 
         {/* RIGHT COLUMN — desktop video only (hidden on mobile) */}
         <div className="hidden lg:block awa-video-col">
-          <div className="bg-black w-full" style={{ aspectRatio: "5 / 6" }}>
+          <div className="awa-video-inner bg-black">
             <video
               autoPlay
               muted
