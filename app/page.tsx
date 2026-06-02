@@ -1,8 +1,7 @@
 'use client'
 
-import Link from "next/link"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 
 /**
  * AWA Landing Page
@@ -11,63 +10,9 @@ import { Menu, X } from "lucide-react"
  */
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  const navItems = ["Race", "Apex", "Cruise", "Services"]
-
   return (
     <div className="min-h-screen bg-[#f5f5f5]">
-
-      {/* ── HEADER ── */}
-      <header
-        className="awa-header flex items-center justify-between py-8 lg:py-0"
-        style={{
-          paddingLeft: "calc(2 / 42 * 100vw)",
-          paddingRight: "calc(3 / 42 * 100vw)",
-        }}
-      >
-        <Link href="/">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/awa-icon.png" alt="AWA" className="h-6 w-auto lg:h-5" />
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-10">
-          {navItems.map((item) => (
-            <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className="text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity"
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-
-          {/* Mobile Hamburger */}
-        <button
-          className="lg:hidden text-[#292929]"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </header>
-
-      {/* Mobile Navigation Menu */}
-      {menuOpen && (
-        <nav className="lg:hidden flex flex-col gap-4 px-4 py-4 bg-white border-b">
-          {navItems.map((item) => (
-            <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className="text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity"
-              onClick={() => setMenuOpen(false)}
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <Header />
 
       {/* ── MOBILE: Hero Video ── */}
       <div className="lg:hidden w-full">
@@ -99,21 +44,12 @@ export default function Home() {
 
           {/* Desktop: Body text — padding-top places it at row 13 from page top */}
           <div className="hidden lg:block awa-desktop-text space-y-0">
-            {[
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
-              "Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.",
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.",
-              "Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.",
-              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse.",
-            ].map((para, i) => (
-              <p
-                key={i}
-                className="text-black font-light italic text-sm leading-relaxed text-justify"
-              >
-                {para}
-              </p>
-            ))}
+            <p className="text-black font-light italic text-sm leading-relaxed text-justify">
+              AWA : Apparent Wind Activities. The velocity of our watercraft produces its own wind, which we skillfully harness to enhance our performance. A design that is optimized for apparent wind angles not only facilitates remarkable speeds, but also unrivaled flexibility and safety on the water. This allows for sailing exceptionally close to the wind and swiftly downwind under contemporary sailplans.
+            </p>
+            <p className="text-black font-light italic text-sm leading-relaxed text-justify pt-4">
+              Founded by Loïc Goepfert and Julien Boucher, AWA is a yacht design studio specializing in high-performance sailing vessels. Our team combines decades of experience in naval architecture, industrial design, and professional sailing to create innovative watercraft that push the boundaries of what&apos;s possible on the water.
+            </p>
           </div>
 
           {/* Mobile: Title + Text side by side */}
@@ -125,16 +61,9 @@ export default function Home() {
             </div>
             <div className="awa-mobile-gap" />
             <div className="awa-mobile-text space-y-4">
-              {[
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
-              ].map((para, i) => (
-                <p
-                  key={i}
-                  className="text-[#292929] font-light italic text-[0.75rem] leading-relaxed text-justify"
-                >
-                  {para}
-                </p>
-              ))}
+              <p className="text-[#292929] font-light italic text-[0.75rem] leading-relaxed text-justify">
+                AWA : Apparent Wind Activities. The velocity of our watercraft produces its own wind, which we skillfully harness to enhance our performance. A design that is optimized for apparent wind angles not only facilitates remarkable speeds, but also unrivaled flexibility and safety on the water.
+              </p>
             </div>
           </div>
         </div>
@@ -155,6 +84,8 @@ export default function Home() {
         </div>
 
       </div>
+
+      <Footer />
     </div>
   )
 }
