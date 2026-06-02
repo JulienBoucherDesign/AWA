@@ -124,26 +124,34 @@
   }
 }
 
-/* AWA 42-column layout helpers
-   1 col = 100vw / 42
-   Video : 17 cols wide, 3 cols right margin, aspect 5:6
-   Text  : 17 cols wide, 2 cols left margin
-*/
-.awa-body {
-  position: relative;
+/* ─── AWA 42-column grid ───────────────────────────────────────────
+   col 1–2   : left margin
+   col 3–19  : text (17 cols)
+   col 20–22 : gap  (3 cols)
+   col 23–39 : video (17 cols)
+   col 40–42 : right margin (3 cols)
+   Video is sticky; text scrolls.
+──────────────────────────────────────────────────────────────────── */
+
+.awa-section {
+  display: grid;
+  grid-template-columns: repeat(42, 1fr);
+  /* both columns align to the bottom of the taller one */
+  align-items: end;
+  width: 100%;
 }
 
 .awa-left-col {
-  margin-left: calc(2 / 42 * 100vw);
-  width: calc(17 / 42 * 100vw);
-  min-height: calc(17 / 42 * 100vw * 6 / 5);
+  grid-column: 3 / 20;   /* cols 3–19 */
   display: flex;
   flex-direction: column;
+  /* video height = 17/42 * 100vw * 6/5 — spacer fills gap above text */
+  min-height: calc(17 / 42 * 100vw * 6 / 5);
 }
 
-.awa-video-wrap {
-  position: absolute;
+.awa-video-col {
+  grid-column: 23 / 40;  /* cols 23–39 */
+  position: sticky;
   top: 0;
-  right: calc(3 / 42 * 100vw);
-  width: calc(17 / 42 * 100vw);
+  align-self: start;
 }
