@@ -223,25 +223,34 @@
     min-height: auto;
   }
 
-  /* Mobile content row: title left, text right using vw-based columns */
+  /* Mobile content row: title left, text right using vw-based columns
+     46-col grid:
+       title : 2-col left margin + 11 cols wide  (cols 3–13)
+       gap   : 3 cols                             (cols 14–16)
+       text  : 27 cols wide + 3-col right margin (cols 17–43 + 44–46)
+  */
   .awa-mobile-content {
     display: flex;
     align-items: flex-start;
     width: 100%;
-    /* right margin: 3/46 */
-    padding-right: calc(3 / 46 * 100vw);
   }
 
-  /* Title: left margin of 2 cols (2/46 * 100vw) */
+  /* Title: 2-col left margin, 11 cols wide */
   .awa-mobile-title {
     flex-shrink: 0;
-    width: calc(16 / 46 * 100vw);
     margin-left: calc(2 / 46 * 100vw);
+    width: calc(11 / 46 * 100vw);
   }
 
-  /* Text occupies 27 cols (fills the rest after the title) */
-  .awa-mobile-text {
-    width: calc(27 / 46 * 100vw);
+  /* Gap between title and text: 3 cols */
+  .awa-mobile-gap {
     flex-shrink: 0;
+    width: calc(3 / 46 * 100vw);
+  }
+
+  /* Text: 27 cols wide, 3-col right margin via padding-right on parent */
+  .awa-mobile-text {
+    flex-shrink: 0;
+    width: calc(27 / 46 * 100vw);
   }
 }

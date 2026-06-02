@@ -123,6 +123,7 @@ export default function Home() {
                 APPARENT<br />WIND<br />ACTIVITIES
               </h1>
             </div>
+            <div className="awa-mobile-gap" />
             <div className="awa-mobile-text space-y-4">
               {[
                 "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
