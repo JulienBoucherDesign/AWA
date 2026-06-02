@@ -15,35 +15,40 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[#f5f5f5] py-16 lg:py-24">
-      <div
-        className="flex flex-col items-center gap-8"
-        style={{
-          paddingLeft: "calc(2 / 42 * 100vw)",
-          paddingRight: "calc(3 / 42 * 100vw)",
-        }}
-      >
-        <p className="text-sm font-medium tracking-wider text-[#292929]">
-          Connect With Us
-        </p>
+    <footer
+      className="bg-[#f5f5f5]"
+      style={{
+        paddingTop: "calc(var(--awa-row, 4rem) * 2)",
+        paddingBottom: "calc(var(--awa-row, 4rem) * 2)",
+        paddingLeft: "calc(2 / 42 * 100vw)",
+        paddingRight: "calc(3 / 42 * 100vw)",
+      }}
+    >
+      {/* "Connect With Us" label */}
+      <p className="text-sm font-medium tracking-wider text-[#292929] mb-2">
+        Connect With Us
+      </p>
 
-        <form onSubmit={handleSubmit} className="flex gap-2 w-full max-w-md">
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="flex-1 px-4 py-3 text-sm font-light italic text-[#292929] bg-transparent border border-[#292929] focus:outline-none focus:ring-1 focus:ring-[#292929]"
-          />
-          <button
-            type="submit"
-            className="px-6 py-3 text-sm font-medium tracking-wider text-[#292929] border border-[#292929] hover:bg-[#292929] hover:text-[#f5f5f5] transition-colors"
-          >
-            {submitted ? "Sent" : "Send"}
-          </button>
-        </form>
+      {/* Single-row form: input + send button on one line */}
+      <form onSubmit={handleSubmit} className="flex items-center" style={{ width: "calc(17 / 42 * 100vw)" }}>
+        <input
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="flex-1 h-8 px-0 text-sm font-light italic text-[#292929] bg-transparent border-b border-[#292929] focus:outline-none placeholder:text-[#292929]/50"
+        />
+        <button
+          type="submit"
+          className="ml-4 h-8 text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity whitespace-nowrap"
+        >
+          {submitted ? "Sent" : "Send"}
+        </button>
+      </form>
 
+      {/* Instagram link */}
+      <div className="mt-6">
         <Link
           href="https://instagram.com"
           target="_blank"

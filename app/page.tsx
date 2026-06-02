@@ -35,14 +35,17 @@ export default function Home() {
         {/* LEFT COLUMN — title top, text bottom (desktop) / hidden on mobile */}
         <div className="awa-left-col">
 
-          {/* Desktop: Title at top */}
+          {/* Desktop: Title at row 3 from page top (padding-top = 2 rows) */}
           <div className="hidden lg:block awa-desktop-title">
             <h1 className="text-[#292929] font-medium tracking-[0.12em] leading-tight text-[1.3rem]">
               APPARENT<br />WIND<br />ACTIVITIES
             </h1>
           </div>
 
-          {/* Desktop: Body text — padding-top places it at row 13 from page top */}
+          {/* Desktop: Spacer pushes text to exactly row 13 from page top */}
+          <div className="hidden lg:block awa-desktop-spacer" />
+
+          {/* Desktop: Body text at row 13 */}
           <div className="hidden lg:block awa-desktop-text space-y-4">
             <p className="text-black font-light italic text-sm leading-relaxed text-justify">
               Founded by Loïc Goepfert and Julien Boucher, AWA is a yacht design studio specializing in high-performance sailing vessels. Our team combines decades of experience in naval architecture, industrial design, and professional sailing to create innovative watercraft that push the boundaries of what&apos;s possible on the water.

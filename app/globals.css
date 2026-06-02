@@ -163,36 +163,40 @@
     height: var(--awa-row);
   }
 
-  /* Section = 21 rows tall, 42-col grid, items aligned to start */
+  /* Section = at least 21 rows tall, 42-col grid.
+     min-height so the section grows if text is long. */
   .awa-section {
     display: grid;
     grid-template-columns: repeat(42, 1fr);
     align-items: start;
-    height: calc(21 * var(--awa-row));
+    min-height: calc(21 * var(--awa-row));
     width: 100%;
   }
 
-  /* Left col: cols 3–19, full section height, position:relative for children */
+  /* Left col: cols 3–19, flex column so children flow normally */
   .awa-left-col {
     grid-column: 3 / 20;
-    height: 100%;
-    position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* Title: row 3 from page top = row 2 from section top = 2 rows down */
+  /* Title: 2 rows below the top of the section (= row 3 from page top) */
   .awa-desktop-title {
-    position: absolute;
-    top: calc(2 * var(--awa-row));
-    left: 0;
-    right: 0;
+    padding-top: calc(2 * var(--awa-row));
   }
 
-  /* Text: row 13 from page top = row 12 from section top */
+  /* Spacer between title and text.
+     Text must start at row 13 from page top = 12 rows from section top.
+     Title starts at 2 rows. Title block height ≈ 3 lines × line-height.
+     We use a fixed spacer of (12 - 2) rows = 10 rows, then the title
+     is inside this via padding-top, so the spacer pushes text to exactly row 12. */
+  .awa-desktop-spacer {
+    height: calc(12 * var(--awa-row));
+    flex-shrink: 0;
+  }
+
   .awa-desktop-text {
-    position: absolute;
-    top: calc(12 * var(--awa-row));
-    left: 0;
-    right: 0;
+    /* no extra margin needed — spacer handles positioning */
   }
 
   /* Video col: cols 23–39
