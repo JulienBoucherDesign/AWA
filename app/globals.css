@@ -248,9 +248,10 @@
     width: calc(3 / 46 * 100vw);
   }
 
-  /* Text: 27 cols wide, 3-col right margin via padding-right on parent */
+  /* Text: 27 cols wide, 3-col right margin */
   .awa-mobile-text {
     flex-shrink: 0;
     width: calc(27 / 46 * 100vw);
+    margin-right: calc(3 / 46 * 100vw);
   }
 }
