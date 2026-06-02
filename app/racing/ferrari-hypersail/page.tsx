@@ -5,71 +5,117 @@ import { Footer } from "@/components/footer"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
-function AnimatedTranscript({ 
-  messages 
-}: { 
+/* ─── Animated transcript ─────────────────────────────────────── */
+function AnimatedTranscript({
+  messages,
+}: {
   messages: { sender: string; time: string; text: string }[]
 }) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [visibleCount, setVisibleCount] = useState(0)
-  const [hasStarted, setHasStarted] = useState(false)
+  const [started, setStarted] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasStarted) {
-          setHasStarted(true)
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true) },
       { threshold: 0.3 }
     )
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current)
-    }
-
+    if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
-  }, [hasStarted])
+  }, [started])
 
   useEffect(() => {
-    if (hasStarted && visibleCount < messages.length) {
-      const timer = setTimeout(() => {
-        setVisibleCount((prev) => prev + 1)
-      }, 600)
-      return () => clearTimeout(timer)
+    if (started && visibleCount < messages.length) {
+      const t = setTimeout(() => setVisibleCount((n) => n + 1), 600)
+      return () => clearTimeout(t)
     }
-  }, [hasStarted, visibleCount, messages.length])
+  }, [started, visibleCount, messages.length])
 
   return (
-    <div ref={containerRef} className="space-y-4 my-8 bg-[#292929]/5 p-6 rounded">
-      {messages.map((msg, idx) => (
+    <div ref={ref} className="space-y-4 my-8 bg-[#292929]/5 p-6 rounded">
+      {messages.map((msg, i) => (
         <div
-          key={idx}
+          key={i}
           className={`transition-all duration-500 ${
-            idx < visibleCount
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
+            i < visibleCount ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
           <p className="text-xs font-mono text-[#292929]/50 mb-1">
             <span className="font-medium">{msg.sender}</span> — {msg.time}
           </p>
-          <p className="text-sm font-light text-[#292929] whitespace-pre-wrap">
-            {msg.text}
-          </p>
+          <p className="text-sm font-light text-[#292929] whitespace-pre-wrap">{msg.text}</p>
         </div>
       ))}
     </div>
   )
 }
 
+/* ─── Margin image with parallax ─────────────────────────────── */
+function MarginImage({
+  src,
+  alt,
+  side = "right",
+  caption,
+}: {
+  src: string
+  alt: string
+  side?: "left" | "right"
+  caption?: string
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [offsetY, setOffsetY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ref.current) return
+      const rect = ref.current.getBoundingClientRect()
+      const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2
+      // Parallax: image moves at 30% of the scroll offset relative to center
+      setOffsetY(centerOffset * 0.08)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`absolute top-0 hidden xl:block w-[18vw] ${
+        side === "left"
+          ? "right-[calc(100%+2vw)]"
+          : "left-[calc(100%+2vw)]"
+      }`}
+      style={{ transform: `translateY(${offsetY}px)` }}
+    >
+      <div className="overflow-hidden bg-[#292929]/5">
+        <Image
+          src={src}
+          alt={alt}
+          width={400}
+          height={280}
+          className="w-full h-auto object-cover"
+        />
+      </div>
+      {caption && (
+        <p className="text-[10px] font-light italic text-[#292929]/40 mt-2 leading-snug">
+          {caption}
+        </p>
+      )}
+    </div>
+  )
+}
+
+/* ─── Page ────────────────────────────────────────────────────── */
 export default function FerrariHypersail() {
   return (
     <main className="min-h-screen bg-[#f5f5f5]">
       <Header />
 
       <div className="px-8 lg:px-16 py-16">
-        <div className="max-w-2xl mx-auto">
+        {/* Outer wrapper: relative so margin images can use absolute positioning */}
+        <div className="relative max-w-2xl mx-auto">
+
           {/* Title */}
           <h1 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-2">
             Ferrari Hypersail — Prequel
@@ -82,12 +128,8 @@ export default function FerrariHypersail() {
 
           {/* Epigraph */}
           <blockquote className="mb-12 border-l-2 border-[#292929]/30 pl-4">
-            <p className="text-sm font-light italic text-[#292929]">
-              This page is not a case study.
-            </p>
-            <p className="text-sm font-light italic text-[#292929]">
-              It is a record.
-            </p>
+            <p className="text-sm font-light italic text-[#292929]">This page is not a case study.</p>
+            <p className="text-sm font-light italic text-[#292929]">It is a record.</p>
           </blockquote>
 
           <hr className="mb-12 border-[#292929]/10" />
@@ -95,7 +137,6 @@ export default function FerrariHypersail() {
           {/* The People */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The people</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Loïc Goepfert is a naval architect.
               He has been part of Guillaume Verdier's design team
@@ -104,7 +145,6 @@ export default function FerrariHypersail() {
               That is where the working relationship started.
               It has held ever since.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Julien Boucher is a designer.
               He and Loïc have worked together for more than fifteen years.
@@ -116,7 +156,6 @@ export default function FerrariHypersail() {
               A habit more than a method.
               A way of keeping the thinking sharp.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed">
               When Loïc joined Verdier's team,
               he brought that background with him.
@@ -129,10 +168,17 @@ export default function FerrariHypersail() {
 
           <hr className="mb-12 border-[#292929]/10" />
 
-          {/* The Call - Intro */}
-          <section className="mb-12">
+          {/* The Call */}
+          <section className="relative mb-12">
+            {/* Foil deck image in left margin */}
+            <MarginImage
+              src="/ferrari-foils-deck.png"
+              alt="Foil geometry study"
+              side="left"
+              caption="Foil range of motion — deck plan"
+            />
+
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The call</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               In 2022, Guillaume had been in conversation
               with John Elkann and Giovanni Soldini.
@@ -141,7 +187,6 @@ export default function FerrariHypersail() {
               is not something we can say with certainty.
               That part of the story belongs to others.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-6">
               What is known is what Guillaume needed:
               a document that could make the idea tangible.
@@ -149,7 +194,6 @@ export default function FerrariHypersail() {
               Precise enough to be credible.
               Resolved enough to feel real.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               Loïc called Julien.
               Julien was at his farm in the north of France,
@@ -176,7 +220,6 @@ export default function FerrariHypersail() {
             Guillaume Verdier. Giovanni Soldini. John Elkann.
             Names that carry weight in very different worlds.
           </p>
-
           <p className="text-sm font-light text-[#292929] leading-relaxed mb-12">
             Julien dealt with that the way he deals with most things.
             He started drawing.
@@ -188,13 +231,11 @@ export default function FerrariHypersail() {
           {/* The Brief */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The brief</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Loïc laid out what he knew.
               The ambition. The names involved. The timeline.
               One month.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Confidentiality was understood from the start —
               it always is, between them.
@@ -202,7 +243,6 @@ export default function FerrariHypersail() {
               Nothing has leaked since.
               That is simply how they work.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               What the project required was specific:
               the fastest offshore racing sailing vessel ever built.
@@ -211,7 +251,6 @@ export default function FerrariHypersail() {
               earned through the object itself,
               through what it is and how it moves.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-12">
               The harder question was one
               Loïc and Julien had never been asked before:
@@ -222,15 +261,21 @@ export default function FerrariHypersail() {
           <hr className="mb-12 border-[#292929]/10" />
 
           {/* The Technical Foundation */}
-          <section className="mb-12">
+          <section className="relative mb-12">
+            {/* Foil studio image in right margin */}
+            <MarginImage
+              src="/ferrari-foils-studio.png"
+              alt="Ferrari Hypersail foiling configuration"
+              side="right"
+              caption="T-foil system — AC75 derived"
+            />
+
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The technical foundation</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Loïc had spent years working with Guillaume
               on foiling IMOCAs —
               boats that circumnavigate the globe and break records.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               But his work on the America's Cup
               had introduced a different frame of reference.
@@ -239,34 +284,6 @@ export default function FerrariHypersail() {
               in serious offshore conditions was real.
               Not theoretical. Not experimental.
               Already happening, in increasingly demanding seas.
-            </p>
-
-            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
-              <Image
-                src="/ferrari-foils-deck.png"
-                alt="Foil geometry and deck ergonomics study"
-                width={800}
-                height={450}
-                className="w-full h-full object-contain"
-              />
-            </div>
-
-            <p className="text-xs font-light italic text-[#292929]/50 mb-8">
-              Foil geometry study — exploring the range of motion and deck plan ergonomics.
-            </p>
-
-            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
-              <Image
-                src="/ferrari-foils-studio.png"
-                alt="Ferrari Hypersail foiling configuration"
-                width={800}
-                height={450}
-                className="w-full h-full object-contain"
-              />
-            </div>
-
-            <p className="text-xs font-light italic text-[#292929]/50 mb-12">
-              Foiling configuration — T-foil system derived from AC75 principles.
             </p>
           </section>
 
@@ -284,20 +301,25 @@ export default function FerrariHypersail() {
           <hr className="my-12 border-[#292929]/10" />
 
           {/* Two Directions */}
-          <section className="mb-12">
+          <section className="relative mb-12">
+            {/* Velarossa sketch 1 in left margin */}
+            <MarginImage
+              src="/ferrari-velarossa-sketch-1.jpg"
+              alt="Ferrari Hypersail 1960s direction sketch"
+              side="left"
+              caption="1960s direction — closed cockpit"
+            />
+
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">Two directions</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Julien opened two visual directions in parallel.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The first drew from the Testarossa —
               the 1990s road car, its wide haunches,
               its particular quality of presence.
               What would a hull look like with that DNA?
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The second looked further back.
               The Ferrari racing cars of the 1960s.
@@ -307,7 +329,6 @@ export default function FerrariHypersail() {
               protected from the world moving past them
               at speeds the world wasn't designed for.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               A vessel moving at offshore racing speeds
               needs to protect its crew completely.
@@ -317,16 +338,6 @@ export default function FerrariHypersail() {
               And those 1960s engineers had addressed
               a version of it sixty years earlier.
             </p>
-
-            <div className="my-8 aspect-video bg-[#292929]/5 overflow-hidden rounded">
-              <Image
-                src="/ferrari-velarossa-sketch-1.jpg"
-                alt="Ferrari Hypersail design sketches - 1960s direction"
-                width={800}
-                height={450}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </section>
 
           {/* Transcript 3 */}
@@ -350,17 +361,14 @@ export default function FerrariHypersail() {
           {/* The Question */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The question with no answer</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               They could draw a fast boat.
               They had done it many times.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The difficulty was a question that had no reference:
               what does a Ferrari sailing vessel actually look like?
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Not a boat with Ferrari's logo on it.
               A boat that Ferrari made — the way Ferrari makes cars.
@@ -369,7 +377,6 @@ export default function FerrariHypersail() {
               What does the object need to be, in itself,
               to be worth the name?
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               Loïc and Julien had spent fifteen years
               drawing boats that did not yet exist.
@@ -392,7 +399,6 @@ export default function FerrariHypersail() {
           {/* How the Month Ran */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">How the month ran</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Every morning. WhatsApp.
               Julien at the farm in the north.
@@ -401,7 +407,6 @@ export default function FerrariHypersail() {
               Technical notes.
               Short messages that required long thinking.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Guillaume was present throughout —
               asking questions that dismantled assumptions.
@@ -413,7 +418,6 @@ export default function FerrariHypersail() {
               could make a week of work look uncertain.
               That was useful.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               Underneath all of it, a tension that never fully lifted.
               Not crisis. Not paralysis.
@@ -436,20 +440,25 @@ export default function FerrariHypersail() {
           <hr className="my-12 border-[#292929]/10" />
 
           {/* The Hull */}
-          <section className="mb-12">
+          <section className="relative mb-12">
+            {/* Velarossa sketch 2 in right margin */}
+            <MarginImage
+              src="/ferrari-velarossa-sketch-2.png"
+              alt="Ferrari Hypersail hull concept lateral view"
+              side="right"
+              caption="Hull — lateral view, iteration 8"
+            />
+
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The hull</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The hull changed more than anything else in the project.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Each version was informed by the last.
               The process was progressive resolution —
               moving toward a form that felt settled
               rather than arrived at through effort.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The distinction matters.
               In a resolved hull, there is nothing left to argue with.
@@ -457,20 +466,9 @@ export default function FerrariHypersail() {
               The transitions are clean.
               The eye moves across the surface without stopping.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               Loïc and Julien reached that point in the third week.
             </p>
-
-            <div className="my-8 aspect-video bg-[#292929]/5 overflow-hidden rounded">
-              <Image
-                src="/ferrari-velarossa-sketch-2.png"
-                alt="Ferrari Hypersail hull concept"
-                width={800}
-                height={450}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </section>
 
           {/* Transcript 6 */}
@@ -486,33 +484,28 @@ export default function FerrariHypersail() {
           <hr className="my-12 border-[#292929]/10" />
 
           {/* The Red */}
-          <section className="mb-12">
+          <section className="relative mb-12">
+            {/* 60s inspired image in left margin */}
+            <MarginImage
+              src="/ferrari-60s-inspired.jpeg"
+              alt="Ferrari Hypersail - 1960s inspired cockpit design"
+              side="left"
+              caption="Red applied — surfaces confirmed"
+            />
+
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The red</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Julien applied Ferrari red to the surfaces.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Metallic red on a complex hull
               exposes everything that is not resolved.
               Every transition slightly off.
               Every proportion not fully settled.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               If the surfaces hold in that colour, they hold.
             </p>
-
-            <div className="my-8 aspect-video bg-[#292929]/5 overflow-hidden rounded">
-              <Image
-                src="/ferrari-60s-inspired.jpeg"
-                alt="Ferrari Hypersail - 1960s inspired cockpit design"
-                width={800}
-                height={450}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </section>
 
           {/* Transcript 7 */}
@@ -528,13 +521,11 @@ export default function FerrariHypersail() {
           {/* The Document */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The document</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The final deliverable was a photorealistic rendering.
               A fully resolved three-dimensional object,
               presented as if it already existed.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-12">
               The document did not propose the Ferrari Hypersail.
               It showed it —
@@ -548,7 +539,6 @@ export default function FerrariHypersail() {
           {/* What Happened Next */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">What happened next</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               Loïc sent Julien a message.
               Short, as always.
@@ -570,12 +560,9 @@ export default function FerrariHypersail() {
 
           <hr className="mb-12 border-[#292929]/10" />
 
-          <hr className="mb-12 border-[#292929]/10" />
-
-          {/* The Final Renders */}
+          {/* The Final Renders — full width, unchanged */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The final renders</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
               By the end of the month,
               the design had crystallized into three presentation views
@@ -583,7 +570,7 @@ export default function FerrariHypersail() {
               Each angle told a different part of the story.
             </p>
 
-            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden">
               <Image
                 src="/ferrari-final-isometric.png"
                 alt="Ferrari Hypersail - Isometric render"
@@ -592,12 +579,11 @@ export default function FerrariHypersail() {
                 className="w-full h-full object-contain"
               />
             </div>
-
             <p className="text-xs font-light italic text-[#292929]/50 mb-8">
               Isometric view — the complete vessel with all systems visible.
             </p>
 
-            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden">
               <Image
                 src="/ferrari-final-profile.png"
                 alt="Ferrari Hypersail - Profile view with logo"
@@ -606,12 +592,11 @@ export default function FerrariHypersail() {
                 className="w-full h-full object-contain"
               />
             </div>
-
             <p className="text-xs font-light italic text-[#292929]/50 mb-8">
               Profile — the Ferrari prancing horse on the sail, the closed cockpit, the red hull.
             </p>
 
-            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden">
               <Image
                 src="/ferrari-final-front.jpeg"
                 alt="Ferrari Hypersail - Front view"
@@ -620,7 +605,6 @@ export default function FerrariHypersail() {
                 className="w-full h-full object-contain"
               />
             </div>
-
             <p className="text-xs font-light italic text-[#292929]/50 mb-12">
               Front — the power and presence of the design, head-on.
             </p>
@@ -631,14 +615,12 @@ export default function FerrariHypersail() {
           {/* What This Was */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">What this was</h3>
-            
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Verdier's team does not carry a designer.
               When this project needed one,
               Loïc called the person he has worked with
               for fifteen years.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               That is what AWA is —
               Loïc's naval architecture and Julien's design,
@@ -647,7 +629,6 @@ export default function FerrariHypersail() {
               A shared language that needed no introduction
               when the right project finally arrived.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               The contribution to the Ferrari Hypersail
               was one month of work.
@@ -655,24 +636,20 @@ export default function FerrariHypersail() {
               A visual argument for something
               that had no physical form yet.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               That document is now a vessel under construction.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               We do not talk about it much.
               The project belongs to others.
             </p>
-
-            <p className="text-sm font-light text-[#292929] leading-relaxed mb-12">
+            <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               But the story of how a WhatsApp message
               sent between a farm in northern France
               and a surf spot in Brittany
               became part of the history of Ferrari —
               that is worth recording.
             </p>
-
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-12">
               Not as a credential.
               As an honest account of how the work happened.
@@ -684,44 +661,23 @@ export default function FerrariHypersail() {
           {/* Timeline */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">Timeline</h3>
-            
             <div className="space-y-4">
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2002</p>
-                <p className="text-sm font-light text-[#292929]">Loïc Goepfert and Guillaume Verdier meet on a hydroplane project. A working relationship begins.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2005</p>
-                <p className="text-sm font-light text-[#292929]">Loïc and Julien start working together. Over fifteen years they build a shared practice alongside their commercial work — concept boats, drawn for themselves.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2022 — The call</p>
-                <p className="text-sm font-light text-[#292929]">Guillaume is in conversation with John Elkann and Giovanni Soldini. He needs a document. Loïc messages Julien on a Tuesday morning.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2022 — Week 1</p>
-                <p className="text-sm font-light text-[#292929]">Typology defined. AC75 logic applied to offshore. First sketches.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2022 — Week 2</p>
-                <p className="text-sm font-light text-[#292929]">Two visual directions explored. 1960s Ferrari references win. Hull iterations begin.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2022 — Week 3</p>
-                <p className="text-sm font-light text-[#292929]">Forms converge. Red applied. Surfaces confirmed.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2022 — Week 4</p>
-                <p className="text-sm font-light text-[#292929]">Photorealistic renders completed. Document delivered.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">2022 — Later</p>
-                <p className="text-sm font-light text-[#292929]">A short message. Ferrari is in.</p>
-              </div>
-              <div className="grid grid-cols-[auto_1fr] gap-6">
-                <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">Now</p>
-                <p className="text-sm font-light text-[#292929]">Ferrari Hypersail — in construction.</p>
-              </div>
+              {[
+                { date: "2002", text: "Loïc Goepfert and Guillaume Verdier meet on a hydroplane project. A working relationship begins." },
+                { date: "2005", text: "Loïc and Julien start working together. Over fifteen years they build a shared practice alongside their commercial work — concept boats, drawn for themselves." },
+                { date: "2022 — The call", text: "Guillaume is in conversation with John Elkann and Giovanni Soldini. He needs a document. Loïc messages Julien on a Tuesday morning." },
+                { date: "2022 — Week 1", text: "Typology defined. AC75 logic applied to offshore. First sketches." },
+                { date: "2022 — Week 2", text: "Two visual directions explored. 1960s Ferrari references win. Hull iterations begin." },
+                { date: "2022 — Week 3", text: "Forms converge. Red applied. Surfaces confirmed." },
+                { date: "2022 — Week 4", text: "Photorealistic renders completed. Document delivered." },
+                { date: "2022 — Later", text: "A short message. Ferrari is in." },
+                { date: "Now", text: "Ferrari Hypersail — in construction." },
+              ].map(({ date, text }) => (
+                <div key={date} className="grid grid-cols-[auto_1fr] gap-6">
+                  <p className="text-xs font-medium text-[#292929]/50 whitespace-nowrap">{date}</p>
+                  <p className="text-sm font-light text-[#292929]">{text}</p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -730,7 +686,6 @@ export default function FerrariHypersail() {
           {/* On the Record */}
           <section className="mb-16">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">On the record</h3>
-            
             <div className="space-y-2 text-sm font-light text-[#292929]">
               <p><span className="font-medium">Naval architecture:</span> Guillaume Verdier / Loïc Goepfert</p>
               <p><span className="font-medium">Design concept:</span> AWA — Loïc Goepfert & Julien Boucher</p>
@@ -742,16 +697,11 @@ export default function FerrariHypersail() {
 
           {/* Final Quote */}
           <blockquote className="border-l-2 border-[#292929]/30 pl-4 mb-16">
-            <p className="text-sm font-light italic text-[#292929]">
-              Fifteen years of preparation.
-            </p>
-            <p className="text-sm font-light italic text-[#292929]">
-              One month of work.
-            </p>
-            <p className="text-sm font-light italic text-[#292929]">
-              One short message.
-            </p>
+            <p className="text-sm font-light italic text-[#292929]">Fifteen years of preparation.</p>
+            <p className="text-sm font-light italic text-[#292929]">One month of work.</p>
+            <p className="text-sm font-light italic text-[#292929]">One short message.</p>
           </blockquote>
+
         </div>
       </div>
 
