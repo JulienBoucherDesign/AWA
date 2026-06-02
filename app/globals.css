@@ -232,10 +232,11 @@
     padding-right: calc(3 / 46 * 100vw);
   }
 
-  /* Title occupies the left 16 cols */
+  /* Title: left margin of 2 cols (2/46 * 100vw) */
   .awa-mobile-title {
     flex-shrink: 0;
     width: calc(16 / 46 * 100vw);
+    margin-left: calc(2 / 46 * 100vw);
   }
 
   /* Text occupies 27 cols (fills the rest after the title) */

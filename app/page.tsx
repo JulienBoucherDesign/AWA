@@ -120,7 +120,7 @@ export default function Home() {
           <div className="lg:hidden awa-mobile-content pt-10 pb-6">
             <div className="awa-mobile-title">
               <h1 className="text-[#292929] font-medium tracking-[0.08em] leading-tight text-[0.9rem]">
-                Apparent<br />Wind<br />Activities
+                APPARENT<br />WIND<br />ACTIVITIES
               </h1>
             </div>
             <div className="awa-mobile-text space-y-4">
