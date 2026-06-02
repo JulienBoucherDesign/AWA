@@ -13,7 +13,7 @@ const navigation = {
     ],
   },
   apex: {
-    label: "Apex performance",
+    label: "Apex",
     items: [
       { label: "75 Skimming trimaran", href: "/apex/75-skimming-trimaran" },
       { label: "72 Skimming catamaran", href: "/apex/72-skimming-catamaran" },
