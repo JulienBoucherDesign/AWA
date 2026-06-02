@@ -13,7 +13,7 @@ export default function FerrariHypersailPage() {
         <section className="pt-16 pb-8 px-8 lg:px-16">
           <div className="max-w-5xl">
             <p className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-2">
-              CONFIDENTIAL — DESIGN ARCHIVE
+              Ferrari Hypersail design Prequel
             </p>
             <h1 className="text-4xl lg:text-6xl font-medium tracking-[0.08em] text-[#292929] leading-none">
               Ferrari Hypersail
