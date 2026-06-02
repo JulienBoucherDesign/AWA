@@ -570,6 +570,64 @@ export default function FerrariHypersail() {
 
           <hr className="mb-12 border-[#292929]/10" />
 
+          <hr className="mb-12 border-[#292929]/10" />
+
+          {/* The Final Renders */}
+          <section className="mb-12">
+            <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">The final renders</h3>
+            
+            <p className="text-sm font-light text-[#292929] leading-relaxed mb-8">
+              By the end of the month,
+              the design had crystallized into three presentation views
+              that captured the object in its entirety.
+              Each angle told a different part of the story.
+            </p>
+
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+              <Image
+                src="/ferrari-final-isometric.png"
+                alt="Ferrari Hypersail - Isometric render"
+                width={800}
+                height={450}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <p className="text-xs font-light italic text-[#292929]/50 mb-8">
+              Isometric view — the complete vessel with all systems visible.
+            </p>
+
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+              <Image
+                src="/ferrari-final-profile.png"
+                alt="Ferrari Hypersail - Profile view with logo"
+                width={800}
+                height={450}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <p className="text-xs font-light italic text-[#292929]/50 mb-8">
+              Profile — the Ferrari prancing horse on the sail, the closed cockpit, the red hull.
+            </p>
+
+            <div className="my-8 aspect-video bg-[#292929] overflow-hidden rounded">
+              <Image
+                src="/ferrari-final-front.jpeg"
+                alt="Ferrari Hypersail - Front view"
+                width={800}
+                height={450}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <p className="text-xs font-light italic text-[#292929]/50 mb-12">
+              Front — the power and presence of the design, head-on.
+            </p>
+          </section>
+
+          <hr className="mb-12 border-[#292929]/10" />
+
           {/* What This Was */}
           <section className="mb-12">
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">What this was</h3>
