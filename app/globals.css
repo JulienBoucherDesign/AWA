@@ -124,31 +124,70 @@
   }
 }
 
-/* ─── AWA 42-column grid ───────────────────────────────────────────
+/* ─── AWA 42-column grid (desktop) ────────────────────────────────
    col 1–2   : left margin
    col 3–19  : text (17 cols)
    col 20–22 : gap  (3 cols)
    col 23–39 : video (17 cols)
    col 40–42 : right margin (3 cols)
-   Video is sticky; text scrolls.
 ──────────────────────────────────────────────────────────────────── */
 
-.awa-section {
-  display: grid;
-  grid-template-columns: repeat(42, 1fr);
-  /* both columns align to the bottom of the taller one */
-  align-items: end;
-  width: 100%;
+@media (min-width: 1024px) {
+  .awa-section {
+    display: grid;
+    grid-template-columns: repeat(42, 1fr);
+    align-items: end;
+    width: 100%;
+  }
+
+  .awa-left-col {
+    grid-column: 3 / 20;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(17 / 42 * 100vw * 6 / 5);
+  }
+
+  .awa-video-col {
+    grid-column: 23 / 40;
+  }
 }
 
-.awa-left-col {
-  grid-column: 3 / 20;   /* cols 3–19 */
-  display: flex;
-  flex-direction: column;
-  /* video height = 17/42 * 100vw * 6/5 — spacer fills gap above text */
-  min-height: calc(17 / 42 * 100vw * 6 / 5);
-}
+/* ─── AWA mobile layout ───────────────────────────────────────────
+   Stacked: video full width, then title + text side by side
+──────────────────────────────────────────────────────────────────── */
 
-.awa-video-col {
-  grid-column: 23 / 40;  /* cols 23–39 */
+@media (max-width: 1023px) {
+  .awa-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .awa-left-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .awa-video-col {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  /* Mobile content layout: title left, text right */
+  .awa-mobile-content {
+    display: flex;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .awa-mobile-title {
+    flex-shrink: 0;
+    width: auto;
+  }
+
+  .awa-mobile-text {
+    flex: 1;
+  }
 }
