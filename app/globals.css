@@ -152,8 +152,11 @@
   }
 }
 
-/* ─── AWA mobile layout ───────────────────────────────────────────
-   Stacked: video full width, then title + text side by side
+/* ─── AWA mobile layout ─────────────────────────────────────────────
+   46-column grid on mobile
+   col 1–16  : title area  (16 cols left margin)
+   col 17–43 : text        (27 cols)
+   col 44–46 : right margin (3 cols)
 ──────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 1023px) {
@@ -170,24 +173,24 @@
     min-height: auto;
   }
 
-  .awa-video-col {
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  /* Mobile content layout: title left, text right */
+  /* Mobile content row: title left, text right using vw-based columns */
   .awa-mobile-content {
     display: flex;
-    gap: 2rem;
-    padding: 0 1rem;
+    align-items: flex-start;
+    width: 100%;
+    /* right margin: 3/46 */
+    padding-right: calc(3 / 46 * 100vw);
   }
 
+  /* Title occupies the left 16 cols */
   .awa-mobile-title {
     flex-shrink: 0;
-    width: auto;
+    width: calc(16 / 46 * 100vw);
   }
 
+  /* Text occupies 27 cols (fills the rest after the title) */
   .awa-mobile-text {
-    flex: 1;
+    width: calc(27 / 46 * 100vw);
+    flex-shrink: 0;
   }
 }
