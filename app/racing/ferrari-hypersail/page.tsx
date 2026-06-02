@@ -310,6 +310,14 @@ export default function FerrariHypersail() {
               caption="1960s direction — closed cockpit"
             />
 
+            {/* Testarossa reference in right margin */}
+            <MarginImage
+              src="/ferrari-testarossa-reference.png"
+              alt="Ferrari Testarossa inspiration"
+              side="right"
+              caption="Testarossa — 1990s wide haunches"
+            />
+
             <h3 className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-6">Two directions</h3>
             <p className="text-sm font-light text-[#292929] leading-relaxed mb-4">
               Julien opened two visual directions in parallel.
@@ -338,6 +346,14 @@ export default function FerrariHypersail() {
               And those 1960s engineers had addressed
               a version of it sixty years earlier.
             </p>
+
+            {/* Ferrari 330 P3 reference in left margin */}
+            <MarginImage
+              src="/ferrari-330p3-reference.png"
+              alt="Ferrari 330 P3 racing prototype"
+              side="left"
+              caption="330 P3 — 1960s racing cockpit protection"
+            />
           </section>
 
           {/* Transcript 3 */}
