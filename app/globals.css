@@ -151,7 +151,4 @@
 
 .awa-video-col {
   grid-column: 23 / 40;  /* cols 23–39 */
-  position: sticky;
-  top: 0;
-  align-self: start;
 }
