@@ -123,3 +123,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* AWA 42-column layout helpers
+   1 col = 100vw / 42
+   Video : 17 cols wide, 3 cols right margin, aspect 5:6
+   Text  : 17 cols wide, 2 cols left margin
+*/
+.awa-body {
+  position: relative;
+}
+
+.awa-left-col {
+  margin-left: calc(2 / 42 * 100vw);
+  width: calc(17 / 42 * 100vw);
+  min-height: calc(17 / 42 * 100vw * 6 / 5);
+  display: flex;
+  flex-direction: column;
+}
+
+.awa-video-wrap {
+  position: absolute;
+  top: 0;
+  right: calc(3 / 42 * 100vw);
+  width: calc(17 / 42 * 100vw);
+}
