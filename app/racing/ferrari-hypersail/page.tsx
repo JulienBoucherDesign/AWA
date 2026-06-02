@@ -2,6 +2,7 @@
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import Image from "next/image"
 
 export default function FerrariHypersailPage() {
   return (
@@ -220,11 +221,14 @@ export default function FerrariHypersailPage() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Direction 1 - Testarossa */}
             <div className="relative">
-              <div className="aspect-[4/3] bg-[#292929]/10 flex items-center justify-center mb-4">
-                <div className="text-center">
-                  <p className="text-[10px] tracking-[0.3em] text-[#292929]/30">[ SKETCH ]</p>
-                  <p className="text-xs font-light italic text-[#292929]/50 mt-2">Testarossa references</p>
-                </div>
+              <div className="aspect-[4/3] bg-[#292929]/10 flex items-center justify-center mb-4 overflow-hidden">
+                <Image
+                  src="/ferrari-hypersail-sketch-1.png"
+                  alt="Ferrari Hypersail design sketch"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <p className="text-sm font-light italic text-[#292929]/70 leading-relaxed">
                 The first drew from the Testarossa —
@@ -238,11 +242,14 @@ export default function FerrariHypersailPage() {
 
             {/* Direction 2 - 1960s */}
             <div className="relative">
-              <div className="aspect-[4/3] bg-[#292929] flex items-center justify-center mb-4">
-                <div className="text-center">
-                  <p className="text-[10px] tracking-[0.3em] text-[#f5f5f5]/30">[ SKETCH ]</p>
-                  <p className="text-xs font-light italic text-[#f5f5f5]/50 mt-2">1960s closed cockpit prototypes</p>
-                </div>
+              <div className="aspect-[4/3] bg-[#292929] flex items-center justify-center mb-4 overflow-hidden">
+                <Image
+                  src="/ferrari-hypersail-concept.png"
+                  alt="Ferrari 1960s design reference"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <p className="text-sm font-light italic text-[#292929] leading-relaxed">
                 The second looked further back.
@@ -371,6 +378,16 @@ export default function FerrariHypersailPage() {
               ))}
             </div>
 
+            <div className="my-12 overflow-hidden">
+              <Image
+                src="/ferrari-hypersail-concept.png"
+                alt="Ferrari Hypersail hull concept"
+                width={800}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+
             <p className="text-sm font-light italic text-[#f5f5f5]/70 leading-relaxed">
               In a resolved hull, there is nothing left to argue with.
               The proportions hold.
@@ -410,6 +427,16 @@ export default function FerrariHypersailPage() {
             <p className="text-lg font-light italic leading-relaxed mb-8">
               Julien applied Ferrari red to the surfaces.
             </p>
+
+            <div className="my-12 overflow-hidden rounded">
+              <Image
+                src="/ferrari-hypersail-wing.png"
+                alt="Ferrari Hypersail wing sail detail"
+                width={800}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
 
             <p className="text-sm font-light italic text-white/80 leading-relaxed mb-8">
               Metallic red on a complex hull
