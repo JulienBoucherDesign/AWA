@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react"
 /**
  * AWA Landing Page
  * Desktop: 42-column grid with video and text side-by-side
- * Mobile: Full-width video, then title + text stacked
+ * Mobile: Hero video first, then title + text
  */
 
 export default function Home() {
@@ -69,51 +69,26 @@ export default function Home() {
         </nav>
       )}
 
-      {/* ── BODY: flex row (desktop grid), stacked (mobile) ── */}
+      {/* ── MOBILE: Hero Video ── */}
+      <div className="lg:hidden w-full">
+        <div className="bg-black w-full" style={{ aspectRatio: "5 / 6" }}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover block"
+          >
+            <source src="/awa-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      {/* ── BODY: flex row (desktop grid), title + text (mobile) ── */}
       <div className="awa-section">
 
-        {/* LEFT COLUMN — title top, text bottom (desktop) */}
+        {/* LEFT COLUMN — title top, text bottom (desktop) / hidden on mobile */}
         <div className="awa-left-col">
-
-          {/* Video + Content Wrapper for Mobile */}
-          <div className="lg:hidden w-full">
-            {/* Mobile: Video full width */}
-            <div className="awa-video-col">
-              <div className="bg-black w-full" style={{ aspectRatio: "5 / 6" }}>
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover block"
-                >
-                  <source src="/awa-video.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </div>
-
-            {/* Mobile: Title + Text side by side */}
-            <div className="awa-mobile-content">
-              <div className="awa-mobile-title">
-                <h1 className="text-[#292929] font-medium tracking-[0.12em] leading-tight text-sm">
-                  Apparent<br />Wind<br />Activities
-                </h1>
-              </div>
-              <div className="awa-mobile-text space-y-3">
-                {[
-                  "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-                  "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
-                ].map((para, i) => (
-                  <p
-                    key={i}
-                    className="text-black font-light italic text-xs leading-relaxed"
-                  >
-                    {para}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
 
           {/* Desktop: Title at top */}
           <div className="hidden lg:block pt-4">
@@ -145,6 +120,28 @@ export default function Home() {
                 {para}
               </p>
             ))}
+          </div>
+
+          {/* Mobile: Title + Text side by side */}
+          <div className="lg:hidden awa-mobile-content">
+            <div className="awa-mobile-title">
+              <h1 className="text-[#292929] font-medium tracking-[0.12em] leading-tight text-sm">
+                Apparent<br />Wind<br />Activities
+              </h1>
+            </div>
+            <div className="awa-mobile-text space-y-3">
+              {[
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+                "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+              ].map((para, i) => (
+                <p
+                  key={i}
+                  className="text-black font-light italic text-xs leading-relaxed"
+                >
+                  {para}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
 
