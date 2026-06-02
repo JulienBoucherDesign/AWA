@@ -141,46 +141,64 @@
 ──────────────────────────────────────────────────────────────────── */
 
 @media (min-width: 1024px) {
-  /* 1 row unit in vw */
+  /*
+    Row unit: total height = 22 rows
+    Video height = (17/42 * 100vw) * (6/5)  ← drives everything
+    1 row = video_height / 22
+
+    Navbar  = 1 row  (rows 1)
+    Section = 21 rows (rows 2–22)
+
+    From page top:
+      Title & video top edge = row 3  → padding-top in section = 2 rows
+      Text top edge          = row 13 → padding-top in section = 12 rows
+      Video bottom edge      = row 22 → video is bottom-aligned in section
+  */
   :root {
     --awa-row: calc(17 / 42 * 100vw * 6 / 5 / 22);
   }
 
+  /* Header = exactly 1 row */
   .awa-header {
     height: var(--awa-row);
-    display: flex;
-    align-items: center;
   }
 
+  /* Section = 21 rows tall, 42-col grid, items aligned to bottom */
   .awa-section {
     display: grid;
     grid-template-columns: repeat(42, 1fr);
-    align-items: start;
+    align-items: end;          /* video aligns to the bottom */
+    height: calc(21 * var(--awa-row));
     width: 100%;
   }
 
+  /* Left col: cols 3–19, full section height, position:relative for children */
   .awa-left-col {
     grid-column: 3 / 20;
-    display: flex;
-    flex-direction: column;
-    /* full 22 rows minus the 1-row header */
-    min-height: calc(21 * var(--awa-row));
+    height: 100%;
+    position: relative;
   }
 
-  /* Title: starts 2 rows below the navbar (3 rows from top − 1 navbar row) */
+  /* Title: row 3 from page top = row 2 from section top = 2 rows down */
   .awa-desktop-title {
-    padding-top: calc(2 * var(--awa-row));
+    position: absolute;
+    top: calc(2 * var(--awa-row));
+    left: 0;
+    right: 0;
   }
 
-  /* Text: starts 12 rows below the navbar (13 rows from top − 1 navbar row) */
+  /* Text: row 13 from page top = row 12 from section top */
   .awa-desktop-text {
-    padding-top: calc(12 * var(--awa-row));
+    position: absolute;
+    top: calc(12 * var(--awa-row));
+    left: 0;
+    right: 0;
   }
 
-  /* Video: starts 2 rows below the navbar, same as title */
+  /* Video col: cols 23–39, align-self:end so it sits at the bottom */
   .awa-video-col {
     grid-column: 23 / 40;
-    padding-top: calc(2 * var(--awa-row));
+    align-self: end;
   }
 }
 
