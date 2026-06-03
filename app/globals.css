@@ -243,16 +243,18 @@
     display: block;
   }
 
-  /* Gitana image: 39 cols wide (cols 3-41), 2-col margins on each side */
+  /* Gitana image: 39 cols wide (cols 3-41), 2-col margins on each side, 19 rows tall */
   .awa-gitana-image {
     grid-column: 3 / 42;
     width: 100%;
+    height: calc(19 * var(--awa-row));
   }
 
   .awa-gitana-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
   }
 }
 
