@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import '@fontsource-variable/source-code-pro'
+import '@fontsource-variable/degular'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -33,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-[#f5f5f5]">
-      <body className="font-mono antialiased">
+      <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
