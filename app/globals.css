@@ -240,7 +240,20 @@
     display: block;
   }
 
-  /* Alibi image: cols 26-41 (16 cols wide), 2-col gap after Ferrari (cols 24-25), 1-col right margin (col 42) */
+  /* Trecento image: cols 26-32 (7 cols wide), 2-col gap after Ferrari, right of Ferrari, above Alibi */
+  .awa-trecento-image {
+    grid-column: 26 / 33;
+    width: 100%;
+    align-self: start;
+  }
+
+  .awa-trecento-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Alibi image: cols 26-41 (16 cols wide), 2-col gap after Ferrari (cols 24-25), below Trecento */
   .awa-alibi-image {
     grid-column: 26 / 42;
     width: 100%;
