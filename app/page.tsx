@@ -2,12 +2,68 @@
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { useRef, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
 
 /**
  * AWA Landing Page
  * Desktop: 42-column grid with video and text side-by-side
  * Mobile: Hero video first, then title + text
  */
+
+function FerrariProjectCard() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isHovering, setIsHovering] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHovering(true)
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play()
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovering(false)
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }
+
+  return (
+    <Link 
+      href="/racing/ferrari-hypersail"
+      className="block relative w-full aspect-video cursor-pointer overflow-hidden group"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Static image (default) */}
+      <Image
+        src="/ferrari-cover-black.png"
+        alt="Ferrari Hypersail"
+        fill
+        className={`object-cover transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`}
+      />
+      
+      {/* Video (plays on hover) */}
+      <video
+        ref={videoRef}
+        muted
+        playsInline
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <source src="/ferrari-flash.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Subtle hover indicator */}
+      <div className="absolute bottom-4 left-4 text-white/60 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+        FERRARI HYPERSAIL
+      </div>
+    </Link>
+  )
+}
 
 export default function Home() {
   return (
@@ -101,6 +157,11 @@ export default function Home() {
           </div>
         </div>
 
+      </div>
+
+      {/* Project Cards Section */}
+      <div className="px-4 lg:px-8 py-12 lg:py-16">
+        <FerrariProjectCard />
       </div>
 
       <Footer />
