@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import '@fontsource-variable/degular'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -33,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-[#f5f5f5]">
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css" />
+      </head>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
