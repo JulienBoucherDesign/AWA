@@ -136,6 +136,7 @@ export default function Home() {
           <HoverVideoLink
             imageSrc="/ferrari-cover-black.png"
             videoSrc="/ferrari-flash.mp4"
+            videoSrcWebm="/ferrari-flash.webm"
             href="/racing/ferrari-hypersail"
             alt="Ferrari yacht design"
           />
@@ -162,6 +163,7 @@ export default function Home() {
           <HoverVideoLink
             imageSrc="/ferrari-cover-black.png"
             videoSrc="/ferrari-flash.mp4"
+            videoSrcWebm="/ferrari-flash.webm"
             href="/racing/ferrari-hypersail"
             alt="Ferrari yacht design"
           />
