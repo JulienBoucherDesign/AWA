@@ -103,6 +103,29 @@ export default function Home() {
 
       </div>
 
+      {/* ── FERRARI SECTION ── */}
+      <div className="awa-section border-t border-[#e0e0e0]">
+        <div className="awa-left-col">
+          {/* Desktop: Ferrari image, 21 cols wide (half page) starting at col 3 */}
+          <div className="hidden lg:block awa-ferrari-image">
+            <img
+              src="/ferrari-cover-black.png"
+              alt="Ferrari yacht design"
+              className="w-full h-auto"
+            />
+          </div>
+
+          {/* Mobile: Ferrari image full width */}
+          <div className="lg:hidden w-full">
+            <img
+              src="/ferrari-cover-black.png"
+              alt="Ferrari yacht design"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   )

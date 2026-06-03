@@ -216,6 +216,18 @@
     display: block;
     object-fit: cover;
   }
+
+  /* Ferrari image: 21 cols wide (half page), 2-col left margin = cols 3-23 */
+  .awa-ferrari-image {
+    grid-column: 3 / 24;
+    width: 100%;
+  }
+
+  .awa-ferrari-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 }
 
 /* ─── AWA mobile layout ─────────────────────────────────────────────
