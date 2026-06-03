@@ -116,6 +116,9 @@ export default function Home() {
             href="/racing/gitana18"
             alt="Gitana 18"
           />
+          <div className="mt-2">
+            <p className="section-title text-xs tracking-[0.15em]">GITANA 18</p>
+          </div>
         </div>
 
         {/* Mobile: Full-width image */}
@@ -126,6 +129,9 @@ export default function Home() {
             href="/racing/gitana18"
             alt="Gitana 18"
           />
+          <div className="mt-2">
+            <p className="section-title text-xs tracking-[0.15em]">GITANA 18</p>
+          </div>
         </div>
       </div>
 
@@ -140,6 +146,9 @@ export default function Home() {
             href="/racing/ferrari-hypersail"
             alt="Ferrari yacht design"
           />
+          <div className="mt-2">
+            <p className="section-title text-xs tracking-[0.15em]">FERRARI HYPERSAIL</p>
+          </div>
         </div>
         <div className="hidden lg:block awa-trecento-image">
           <HoverVideoLink
@@ -148,6 +157,9 @@ export default function Home() {
             href="/apex/tre-cento"
             alt="Trecento"
           />
+          <div className="mt-2">
+            <p className="section-title text-xs tracking-[0.15em]">TRE CENTO</p>
+          </div>
         </div>
         <div className="hidden lg:block awa-alibi-image">
           <HoverVideoLink
@@ -156,29 +168,47 @@ export default function Home() {
             href="/cruising/alibi"
             alt="Alibi Catamarans"
           />
+          <div className="mt-2">
+            <p className="section-title text-xs tracking-[0.15em]">ALIBI CATAMARANS</p>
+          </div>
         </div>
 
         {/* Mobile: Stacked images */}
         <div className="lg:hidden w-full px-4 py-6 space-y-6">
-          <HoverVideoLink
-            imageSrc="/ferrari-cover-black.png"
-            videoSrc="/ferrari-flash.mp4"
-            videoSrcWebm="/ferrari-flash.webm"
-            href="/racing/ferrari-hypersail"
-            alt="Ferrari yacht design"
-          />
-          <HoverVideoLink
-            imageSrc="/trecento-vignette.jpg"
-            videoSrc="/trecento-flash.mp4"
-            href="/apex/tre-cento"
-            alt="Trecento"
-          />
-          <HoverVideoLink
-            imageSrc="/alibi-yard.png"
-            videoSrc="/alibi-flash.mp4"
-            href="/cruising/alibi"
-            alt="Alibi Catamarans"
-          />
+          <div>
+            <HoverVideoLink
+              imageSrc="/ferrari-cover-black.png"
+              videoSrc="/ferrari-flash.mp4"
+              videoSrcWebm="/ferrari-flash.webm"
+              href="/racing/ferrari-hypersail"
+              alt="Ferrari yacht design"
+            />
+            <div className="mt-2">
+              <p className="section-title text-xs tracking-[0.15em]">FERRARI HYPERSAIL</p>
+            </div>
+          </div>
+          <div>
+            <HoverVideoLink
+              imageSrc="/trecento-vignette.jpg"
+              videoSrc="/trecento-flash.mp4"
+              href="/apex/tre-cento"
+              alt="Trecento"
+            />
+            <div className="mt-2">
+              <p className="section-title text-xs tracking-[0.15em]">TRE CENTO</p>
+            </div>
+          </div>
+          <div>
+            <HoverVideoLink
+              imageSrc="/alibi-yard.png"
+              videoSrc="/alibi-flash.mp4"
+              href="/cruising/alibi"
+              alt="Alibi Catamarans"
+            />
+            <div className="mt-2">
+              <p className="section-title text-xs tracking-[0.15em]">ALIBI CATAMARANS</p>
+            </div>
+          </div>
         </div>
       </div>
 
