@@ -33,35 +33,47 @@ function FerrariProjectCard() {
   }
 
   return (
-    <Link 
-      href="/racing/ferrari-hypersail"
-      className="block relative w-full aspect-video cursor-pointer overflow-hidden group"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Static image (default) */}
-      <Image
-        src="/ferrari-cover-black.png"
-        alt="Ferrari Hypersail"
-        fill
-        className={`object-cover transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`}
-      />
+    <div className="grid grid-cols-12 gap-4 lg:gap-6">
+      {/* Left margin: 2 columns */}
+      <div className="hidden lg:block lg:col-span-2"></div>
       
-      {/* Video (plays on hover) */}
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+      {/* Content: 50% width (5 out of remaining 10 columns) */}
+      <Link 
+        href="/racing/ferrari-hypersail"
+        className="col-span-12 lg:col-span-5 block relative cursor-pointer overflow-hidden group"
+        style={{ aspectRatio: "16 / 10" }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        <source src="/ferrari-flash.mp4" type="video/mp4" />
-      </video>
+        {/* Static image (default) */}
+        <div className="relative w-full h-full bg-black">
+          <Image
+            src="/ferrari-cover-black.png"
+            alt="Ferrari Hypersail"
+            fill
+            className={`object-contain transition-opacity duration-300 ${isHovering ? 'opacity-0' : 'opacity-100'}`}
+          />
+          
+          {/* Video (plays on hover) */}
+          <video
+            ref={videoRef}
+            muted
+            playsInline
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <source src="/ferrari-flash.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Subtle hover indicator */}
+          <div className="absolute bottom-4 left-4 text-white/60 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+            FERRARI HYPERSAIL
+          </div>
+        </div>
+      </Link>
       
-      {/* Subtle hover indicator */}
-      <div className="absolute bottom-4 left-4 text-white/60 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-        FERRARI HYPERSAIL
-      </div>
-    </Link>
+      {/* Right margin: fill remaining space */}
+      <div className="hidden lg:block lg:col-span-5"></div>
+    </div>
   )
 }
 
