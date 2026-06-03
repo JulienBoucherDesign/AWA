@@ -230,9 +230,9 @@
     display: block;
   }
 
-  /* Alibi image: cols 26-40 (14 cols wide), 2-col gap after Ferrari (cols 24-25), 3-col right margin (cols 41-42) */
+  /* Alibi image: cols 26-41 (16 cols wide), 2-col gap after Ferrari (cols 24-25), 1-col right margin (col 42) */
   .awa-alibi-image {
-    grid-column: 26 / 40;
+    grid-column: 26 / 42;
     width: 100%;
     align-self: end;
   }
