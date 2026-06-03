@@ -56,7 +56,7 @@ export function Header() {
               onMouseEnter={() => setOpenDropdown(key)}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              <button className="flex items-center gap-1 text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity">
+              <button className="menu-item flex items-center gap-1 text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity">
                 {label}
                 <ChevronDown size={14} className={`transition-transform ${openDropdown === key ? 'rotate-180' : ''}`} />
               </button>
@@ -68,7 +68,7 @@ export function Header() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-sm font-light italic text-[#292929] hover:bg-[#e8e8e8] transition-colors"
+                        className="menu-item block px-4 py-2 text-sm font-light italic text-[#292929] hover:bg-[#e8e8e8] transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -81,7 +81,7 @@ export function Header() {
           
           <Link
             href="/about"
-            className="text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity"
+            className="menu-item text-sm font-medium tracking-wider text-[#292929] hover:opacity-60 transition-opacity"
           >
             About
           </Link>
@@ -102,7 +102,7 @@ export function Header() {
           {Object.entries(navigation).map(([key, { label, items }]) => (
             <div key={key}>
               <button
-                className="flex items-center justify-between w-full py-2 text-sm font-medium tracking-wider text-[#292929]"
+                className="menu-item flex items-center justify-between w-full py-2 text-sm font-medium tracking-wider text-[#292929]"
                 onClick={() => setOpenDropdown(openDropdown === key ? null : key)}
               >
                 {label}
@@ -115,7 +115,7 @@ export function Header() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="block py-2 text-sm font-light italic text-[#292929]"
+                      className="menu-item block py-2 text-sm font-light italic text-[#292929]"
                       onClick={() => setMenuOpen(false)}
                     >
                       {item.label}
@@ -128,7 +128,7 @@ export function Header() {
           
           <Link
             href="/about"
-            className="py-2 text-sm font-medium tracking-wider text-[#292929]"
+            className="menu-item py-2 text-sm font-medium tracking-wider text-[#292929]"
             onClick={() => setMenuOpen(false)}
           >
             About
