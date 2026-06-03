@@ -242,6 +242,18 @@
     height: auto;
     display: block;
   }
+
+  /* Gitana image: 39 cols wide (cols 3-41), 2-col margins on each side */
+  .awa-gitana-image {
+    grid-column: 3 / 42;
+    width: 100%;
+  }
+
+  .awa-gitana-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 }
 
 /* ─── AWA mobile layout ─────────────────────────────────────────────

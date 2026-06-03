@@ -104,6 +104,29 @@ export default function Home() {
 
       </div>
 
+      {/* ── GITANA SECTION ── */}
+      <div className="awa-section border-t border-[#e0e0e0] pt-16">
+        {/* Desktop: Full-page image (cols 3-41, 2-col margins on each side) */}
+        <div className="hidden lg:block awa-gitana-image">
+          <HoverVideoLink
+            imageSrc="/gitana-18.png"
+            videoSrc="/gitana-flash.mp4"
+            href="/racing/gitana18"
+            alt="Gitana 18"
+          />
+        </div>
+
+        {/* Mobile: Full-width image */}
+        <div className="lg:hidden w-full px-4 py-6">
+          <HoverVideoLink
+            imageSrc="/gitana-18.png"
+            videoSrc="/gitana-flash.mp4"
+            href="/racing/gitana18"
+            alt="Gitana 18"
+          />
+        </div>
+      </div>
+
       {/* ── FERRARI + ALIBI SECTION ── */}
       <div className="awa-section border-t border-[#e0e0e0] pt-64">
         {/* Desktop: Both images in grid */}
