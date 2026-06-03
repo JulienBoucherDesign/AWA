@@ -1,10 +1,12 @@
 "use client"
 
 import { useState, useRef } from "react"
+import { useRouter } from "next/navigation"
 
 export function FerrariHoverVideo() {
   const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const router = useRouter()
 
   const handleMouseEnter = () => {
     if (videoRef.current && !isPlaying) {
@@ -18,8 +20,12 @@ export function FerrariHoverVideo() {
     setIsPlaying(false)
   }
 
+  const handleClick = () => {
+    router.push("/racing/ferrari-hypersail")
+  }
+
   return (
-    <div className="relative w-full cursor-pointer" onMouseEnter={handleMouseEnter}>
+    <div className="relative w-full cursor-pointer" onMouseEnter={handleMouseEnter} onClick={handleClick}>
       {/* Image - visible when video is not playing */}
       <img
         src="/ferrari-cover-black.png"
