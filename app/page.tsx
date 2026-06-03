@@ -142,7 +142,7 @@ export default function Home() {
           <HoverVideoLink
             imageSrc="/alibi-yard.png"
             videoSrc="/alibi-flash.mp4"
-            href="/cruising/alibi-catamarans"
+            href="/cruising/alibi"
             alt="Alibi Catamarans"
           />
         </div>
@@ -158,7 +158,7 @@ export default function Home() {
           <HoverVideoLink
             imageSrc="/alibi-yard.png"
             videoSrc="/alibi-flash.mp4"
-            href="/cruising/alibi-catamarans"
+            href="/cruising/alibi"
             alt="Alibi Catamarans"
           />
         </div>
