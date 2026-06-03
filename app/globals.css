@@ -221,9 +221,23 @@
   .awa-ferrari-image {
     grid-column: 3 / 24;
     width: 100%;
+    align-self: end;
   }
 
   .awa-ferrari-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Alibi image: cols 26-41 (16 cols wide), 2-col gap after Ferrari (cols 24-25), 1-col right margin (col 42) */
+  .awa-alibi-image {
+    grid-column: 26 / 42;
+    width: 100%;
+    align-self: end;
+  }
+
+  .awa-alibi-image img {
     width: 100%;
     height: auto;
     display: block;

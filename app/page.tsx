@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { FerrariHoverVideo } from "@/components/ferrari-hover-video"
+import { HoverVideoLink } from "@/components/hover-video-link"
 
 /**
  * AWA Landing Page
@@ -104,18 +104,40 @@ export default function Home() {
 
       </div>
 
-      {/* ── FERRARI SECTION ── */}
-      <div className="awa-section border-t border-[#e0e0e0]">
-        <div className="awa-left-col">
-          {/* Desktop: Ferrari hover video, 21 cols wide (half page) starting at col 3 */}
-          <div className="hidden lg:block awa-ferrari-image">
-            <FerrariHoverVideo />
-          </div>
+      {/* ── FERRARI + ALIBI SECTION ── */}
+      <div className="awa-section border-t border-[#e0e0e0] pt-64">
+        {/* Desktop: Both images in grid */}
+        <div className="hidden lg:block awa-ferrari-image">
+          <HoverVideoLink
+            imageSrc="/ferrari-cover-black.png"
+            videoSrc="/ferrari-flash.mp4"
+            href="/racing/ferrari-hypersail"
+            alt="Ferrari yacht design"
+          />
+        </div>
+        <div className="hidden lg:block awa-alibi-image">
+          <HoverVideoLink
+            imageSrc="/alibi-yard.png"
+            videoSrc="/alibi-flash.mp4"
+            href="/cruising/alibi-catamarans"
+            alt="Alibi Catamarans"
+          />
+        </div>
 
-          {/* Mobile: Ferrari hover video full width */}
-          <div className="lg:hidden w-full">
-            <FerrariHoverVideo />
-          </div>
+        {/* Mobile: Stacked images */}
+        <div className="lg:hidden w-full px-4 py-6 space-y-6">
+          <HoverVideoLink
+            imageSrc="/ferrari-cover-black.png"
+            videoSrc="/ferrari-flash.mp4"
+            href="/racing/ferrari-hypersail"
+            alt="Ferrari yacht design"
+          />
+          <HoverVideoLink
+            imageSrc="/alibi-yard.png"
+            videoSrc="/alibi-flash.mp4"
+            href="/cruising/alibi-catamarans"
+            alt="Alibi Catamarans"
+          />
         </div>
       </div>
 
