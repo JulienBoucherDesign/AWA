@@ -105,7 +105,7 @@ export default function Home() {
       </div>
 
       {/* ── GITANA SECTION ── */}
-      <div className="awa-section border-t border-[#e0e0e0] pt-16">
+      <div className="awa-section border-t border-[#e0e0e0] awa-gitana-section">
         {/* Desktop: Full-page image (cols 3-41, 2-col margins on each side) */}
         <div className="hidden lg:block awa-gitana-image">
           <HoverVideoLink
@@ -128,7 +128,7 @@ export default function Home() {
       </div>
 
       {/* ── FERRARI + ALIBI SECTION ── */}
-      <div className="awa-section border-t border-[#e0e0e0] pt-64">
+      <div className="awa-section border-t border-[#e0e0e0] awa-ferrari-section">
         {/* Desktop: Both images in grid */}
         <div className="hidden lg:block awa-ferrari-image">
           <HoverVideoLink

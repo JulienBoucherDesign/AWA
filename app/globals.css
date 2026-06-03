@@ -217,6 +217,16 @@
     object-fit: cover;
   }
 
+  /* Gitana section: 8 rows margin from text section above */
+  .awa-gitana-section {
+    padding-top: calc(8 * var(--awa-row));
+  }
+
+  /* Ferrari+Alibi section: 1 row margin from Gitana above */
+  .awa-ferrari-section {
+    padding-top: calc(1 * var(--awa-row));
+  }
+
   /* Ferrari image: 21 cols wide (half page), 2-col left margin = cols 3-23 */
   .awa-ferrari-image {
     grid-column: 3 / 24;
@@ -243,9 +253,9 @@
     display: block;
   }
 
-  /* Gitana image: 17 cols wide (cols 3-19), 2-col left margin, 19 rows tall */
+  /* Gitana image: 17 cols wide, centered (cols 13-29 on 42-col grid), 19 rows tall */
   .awa-gitana-image {
-    grid-column: 3 / 20;
+    grid-column: 13 / 30;
     width: 100%;
     height: calc(19 * var(--awa-row));
   }
