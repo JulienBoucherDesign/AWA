@@ -30,12 +30,38 @@ export function HoverVideoLink({ imageSrc, videoSrc, href, alt }: HoverVideoLink
     setIsPlaying(false)
   }
 
-  const handleClick = () => {
-    router.push(href)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (videoRef.current && !isPlaying) {
+      setIsPlaying(true)
+      videoRef.current.currentTime = 0
+      videoRef.current.play().catch(() => {
+        setIsPlaying(false)
+      })
+    }
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    // Only navigate if the video has finished or hasn't started
+    if (!isPlaying) {
+      router.push(href)
+    }
+  }
+
+  const handleClick = (e: React.MouseEvent) => {
+    // Only handle click on desktop (non-touch)
+    if (!(e.nativeEvent as any).sourceCapabilities?.firesTouchEvents) {
+      router.push(href)
+    }
   }
 
   return (
-    <div className="relative w-full cursor-pointer" onMouseEnter={handleMouseEnter} onClick={handleClick}>
+    <div
+      className="relative w-full cursor-pointer"
+      onMouseEnter={handleMouseEnter}
+      onClick={handleClick}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Image - visible when video is not playing */}
       <img
         src={imageSrc}
