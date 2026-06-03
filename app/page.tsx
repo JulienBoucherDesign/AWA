@@ -129,13 +129,21 @@ export default function Home() {
 
       {/* ── FERRARI + ALIBI SECTION ── */}
       <div className="awa-section border-t border-[#e0e0e0] awa-ferrari-section">
-        {/* Desktop: Both images in grid */}
+        {/* Desktop: All three images in grid */}
         <div className="hidden lg:block awa-ferrari-image">
           <HoverVideoLink
             imageSrc="/ferrari-cover-black.png"
             videoSrc="/ferrari-flash.mp4"
             href="/racing/ferrari-hypersail"
             alt="Ferrari yacht design"
+          />
+        </div>
+        <div className="hidden lg:block awa-trecento-image">
+          <HoverVideoLink
+            imageSrc="/trecento-vignette.jpg"
+            videoSrc="/trecento-flash.mp4"
+            href="/apex/tre-cento"
+            alt="Trecento"
           />
         </div>
         <div className="hidden lg:block awa-alibi-image">
@@ -154,6 +162,12 @@ export default function Home() {
             videoSrc="/ferrari-flash.mp4"
             href="/racing/ferrari-hypersail"
             alt="Ferrari yacht design"
+          />
+          <HoverVideoLink
+            imageSrc="/trecento-vignette.jpg"
+            videoSrc="/trecento-flash.mp4"
+            href="/apex/tre-cento"
+            alt="Trecento"
           />
           <HoverVideoLink
             imageSrc="/alibi-yard.png"
