@@ -19,7 +19,10 @@ export function HoverVideoLink({ imageSrc, videoSrc, href, alt }: HoverVideoLink
     if (videoRef.current && !isPlaying) {
       setIsPlaying(true)
       videoRef.current.currentTime = 0
-      videoRef.current.play()
+      videoRef.current.play().catch(() => {
+        // Video play failed (e.g., user hasn't interacted yet), reset state
+        setIsPlaying(false)
+      })
     }
   }
 
@@ -47,6 +50,7 @@ export function HoverVideoLink({ imageSrc, videoSrc, href, alt }: HoverVideoLink
         muted
         playsInline
         onEnded={handleVideoEnd}
+        onError={() => setIsPlaying(false)}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}
       />
     </div>
