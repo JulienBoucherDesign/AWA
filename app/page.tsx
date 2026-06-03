@@ -105,7 +105,7 @@ export default function Home() {
       </div>
 
       {/* ── FERRARI + ALIBI SECTION ── */}
-      <div className="awa-section border-t border-[#e0e0e0] pt-24">
+      <div className="awa-section border-t border-[#e0e0e0] pt-64">
         {/* Desktop: Both images in grid */}
         <div className="hidden lg:block awa-ferrari-image">
           <HoverVideoLink
