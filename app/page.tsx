@@ -25,6 +25,7 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover block"
           >
+            <source src="/awa-video.webm" type="video/webm" />
             <source src="/awa-video.mp4" type="video/mp4" />
           </video>
         </div>
@@ -97,6 +98,7 @@ export default function Home() {
               playsInline
               className="w-full h-full object-cover block"
             >
+              <source src="/awa-video.webm" type="video/webm" />
               <source src="/awa-video.mp4" type="video/mp4" />
             </video>
           </div>
