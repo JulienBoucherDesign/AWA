@@ -2,6 +2,7 @@
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { FerrariHoverVideo } from "@/components/ferrari-hover-video"
 
 /**
  * AWA Landing Page
@@ -106,22 +107,14 @@ export default function Home() {
       {/* ── FERRARI SECTION ── */}
       <div className="awa-section border-t border-[#e0e0e0]">
         <div className="awa-left-col">
-          {/* Desktop: Ferrari image, 21 cols wide (half page) starting at col 3 */}
+          {/* Desktop: Ferrari hover video, 21 cols wide (half page) starting at col 3 */}
           <div className="hidden lg:block awa-ferrari-image">
-            <img
-              src="/ferrari-cover-black.png"
-              alt="Ferrari yacht design"
-              className="w-full h-auto"
-            />
+            <FerrariHoverVideo />
           </div>
 
-          {/* Mobile: Ferrari image full width */}
+          {/* Mobile: Ferrari hover video full width */}
           <div className="lg:hidden w-full">
-            <img
-              src="/ferrari-cover-black.png"
-              alt="Ferrari yacht design"
-              className="w-full h-auto"
-            />
+            <FerrariHoverVideo />
           </div>
         </div>
       </div>
