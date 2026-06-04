@@ -272,11 +272,13 @@
     display: block;
   }
 
-  /* Alibi image: cols 26-41 (16 cols wide), 2-col gap after Ferrari, below Trecento */
+  /* Alibi image: cols 26-42 (16 cols wide), 2-col gap after Ferrari, same row as 72 Skimming */
   .awa-alibi-image {
     grid-column: 26 / 42;
+    grid-row: 2;
     width: 100%;
-    align-self: end;
+    align-self: start;
+    padding-top: calc(1 * var(--awa-row));
   }
 
   .awa-alibi-image img {
@@ -288,9 +290,10 @@
   /* 72 Skimming image: same width as Ferrari (cols 3-24), positioned below Ferrari */
   .awa-72skimming-image {
     grid-column: 3 / 24;
+    grid-row: 2;
     width: 100%;
     align-self: start;
-    margin-top: calc(2 * var(--awa-row));
+    padding-top: calc(1 * var(--awa-row));
   }
 
   .awa-72skimming-image img {
