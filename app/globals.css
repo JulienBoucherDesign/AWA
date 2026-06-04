@@ -287,13 +287,13 @@
     display: block;
   }
 
-  /* 72 Skimming image: same width as Ferrari (cols 3-24), positioned below Ferrari */
+  /* 72 Skimming image: 10 cols wide (half of Ferrari), 2-col left margin, 8 rows below Ferrari */
   .awa-72skimming-image {
-    grid-column: 3 / 24;
+    grid-column: 3 / 13;
     grid-row: 2;
     width: 100%;
     align-self: start;
-    padding-top: calc(1 * var(--awa-row));
+    padding-top: calc(8 * var(--awa-row));
   }
 
   .awa-72skimming-image img {
