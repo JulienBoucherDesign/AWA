@@ -129,6 +129,18 @@
     font-family: "Degular Variable", sans-serif;
     font-variation-settings: 'opsz' 6, 'wght' 300, 'ital' 1;
   }
+  
+  .body-text {
+    font-family: "Degular Variable", sans-serif;
+    font-variation-settings: 'opsz' 6, 'wght' 100, 'ital' 1;
+    color: #1a1a1a;
+  }
+  
+  .section-title {
+    font-family: "Source Code Pro Variable", monospace;
+    font-variation-settings: 'wght' 500;
+    color: #292929;
+  }
 }
 
 /* ─── AWA row system (desktop) ─────────────────────────────────────
