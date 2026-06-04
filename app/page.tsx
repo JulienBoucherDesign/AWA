@@ -1,8 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { HoverVideoLink } from "@/components/hover-video-link"
+import { Preloader } from "@/components/preloader"
 
 /**
  * AWA Landing Page
@@ -11,9 +13,14 @@ import { HoverVideoLink } from "@/components/hover-video-link"
  */
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
-    <div className="min-h-screen bg-[#f5f5f5]">
-      <Header />
+    <>
+      {isLoading && <Preloader onLoadComplete={() => setIsLoading(false)} />}
+      
+      <div className={`min-h-screen bg-[#f5f5f5] ${isLoading ? 'overflow-hidden' : ''}`}>
+        <Header />
 
       {/* ── MOBILE: Hero Video ── */}
       <div className="lg:hidden w-full">
@@ -235,6 +242,7 @@ export default function Home() {
       </div>
 
       <Footer />
-    </div>
+      </div>
+    </>
   )
 }

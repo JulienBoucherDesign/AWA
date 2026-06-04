@@ -324,6 +324,20 @@
    col 44–46 : right margin (3 cols)
 ──────────────────────────────────────────────────────────────────── */
 
+/* Blinking animation for preloader dot */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
 @media (max-width: 1023px) {
   .awa-section {
     display: flex;
