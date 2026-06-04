@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { HoverVideoLink } from "@/components/hover-video-link"
@@ -14,6 +14,16 @@ import { Preloader } from "@/components/preloader"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
+  const mobileVideoRef = useRef<HTMLVideoElement>(null)
+  const desktopVideoRef = useRef<HTMLVideoElement>(null)
+
+  // Start hero videos only after preloader is complete
+  useEffect(() => {
+    if (!isLoading) {
+      mobileVideoRef.current?.play()
+      desktopVideoRef.current?.play()
+    }
+  }, [isLoading])
 
   return (
     <>
@@ -26,7 +36,7 @@ export default function Home() {
       <div className="lg:hidden w-full">
         <div className="bg-black w-full" style={{ aspectRatio: "5 / 6" }}>
           <video
-            autoPlay
+            ref={mobileVideoRef}
             muted
             loop
             playsInline
@@ -99,7 +109,7 @@ export default function Home() {
         <div className="hidden lg:block awa-video-col">
           <div className="awa-video-inner bg-black">
             <video
-              autoPlay
+              ref={desktopVideoRef}
               muted
               loop
               playsInline
