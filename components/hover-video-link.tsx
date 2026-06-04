@@ -98,6 +98,7 @@ export function HoverVideoLink({ imageSrc, videoSrc, videoSrcWebm, href, alt }: 
         ref={videoRef}
         muted
         playsInline
+        preload="auto"
         onEnded={handleVideoEnd}
         onError={() => setIsPlaying(false)}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}

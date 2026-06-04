@@ -44,36 +44,53 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => clearTimeout(minDuration)
   }, [])
 
-  // Preload all videos
+  // Preload all videos using fetch for better mobile support
   useEffect(() => {
-    let loadedCount = 0
-    const totalVideos = VIDEOS_TO_PRELOAD.length
+    let isMounted = true
+    
+    const preloadVideos = async () => {
+      const preloadPromises = VIDEOS_TO_PRELOAD.map(async (src) => {
+        try {
+          // Use fetch to actually download the video data
+          const response = await fetch(src, { 
+            method: 'GET',
+            cache: 'force-cache'
+          })
+          
+          if (response.ok) {
+            // Read the response to ensure it's fully downloaded
+            await response.blob()
+            console.log('[v0] Preloaded:', src)
+          }
+        } catch (error) {
+          console.log('[v0] Failed to preload:', src, error)
+          // Continue even if one video fails
+        }
+      })
 
-    const checkAllLoaded = () => {
-      loadedCount++
-      if (loadedCount >= totalVideos) {
+      // Wait for all videos to preload (or fail)
+      await Promise.allSettled(preloadPromises)
+      
+      if (isMounted) {
+        console.log('[v0] All videos preloaded')
         setVideosLoaded(true)
       }
     }
 
-    VIDEOS_TO_PRELOAD.forEach((src) => {
-      const video = document.createElement('video')
-      video.preload = 'auto'
-      video.muted = true
-      
-      video.oncanplaythrough = checkAllLoaded
-      video.onerror = checkAllLoaded // Count errors as "loaded" to not block
-      
-      video.src = src
-      video.load()
-    })
+    preloadVideos()
 
     // Fallback timeout in case videos take too long
     const timeout = setTimeout(() => {
-      setVideosLoaded(true)
-    }, 10000) // 10 second max wait
+      if (isMounted && !videosLoaded) {
+        console.log('[v0] Preload timeout reached')
+        setVideosLoaded(true)
+      }
+    }, 15000) // 15 second max wait
 
-    return () => clearTimeout(timeout)
+    return () => {
+      isMounted = false
+      clearTimeout(timeout)
+    }
   }, [])
 
   // Typewriter animation with syncope pauses

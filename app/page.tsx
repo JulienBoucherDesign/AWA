@@ -40,6 +40,7 @@ export default function Home() {
             muted
             loop
             playsInline
+            preload="auto"
             className="w-full h-full object-cover block"
           >
             <source src="/awa-video.webm" type="video/webm" />
@@ -113,6 +114,7 @@ export default function Home() {
               muted
               loop
               playsInline
+              preload="auto"
               className="w-full h-full object-cover block"
             >
               <source src="/awa-video.webm" type="video/webm" />
