@@ -24,10 +24,20 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
   const [showBlinkingDot, setShowBlinkingDot] = useState(false)
   const [isExiting, setIsExiting] = useState(false)
   const [videosLoaded, setVideosLoaded] = useState(false)
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false)
 
   const firstLine = 'Same wind, unequal future.'
   const secondLine = 'Unlock apparent wind.'
   const fullText = firstLine + '\n' + secondLine
+
+  // Minimum 5 seconds duration
+  useEffect(() => {
+    const minDuration = setTimeout(() => {
+      setMinTimeElapsed(true)
+    }, 5000)
+
+    return () => clearTimeout(minDuration)
+  }, [])
 
   // Preload all videos
   useEffect(() => {
@@ -100,9 +110,9 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => clearTimeout(startDelay)
   }, [fullText, firstLine.length])
 
-  // Handle exit animation when videos are loaded and typing is complete
+  // Handle exit animation when videos are loaded, typing is complete, AND minimum time has elapsed
   useEffect(() => {
-    if (videosLoaded && isTypingComplete) {
+    if (videosLoaded && isTypingComplete && minTimeElapsed) {
       // Small delay before starting exit animation
       const exitDelay = setTimeout(() => {
         setIsExiting(true)
@@ -112,7 +122,7 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
       
       return () => clearTimeout(exitDelay)
     }
-  }, [videosLoaded, isTypingComplete, onLoadComplete])
+  }, [videosLoaded, isTypingComplete, minTimeElapsed, onLoadComplete])
 
   // Render text with blinking dot
   const renderText = useCallback(() => {
