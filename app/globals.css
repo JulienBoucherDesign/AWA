@@ -272,14 +272,31 @@
     display: block;
   }
 
-  /* Alibi image: cols 26-41 (16 cols wide), 2-col gap after Ferrari (cols 24-25), below Trecento */
+  /* Alibi image: cols 26-42 (16 cols wide), 2-col gap after Ferrari, same row as 72 Skimming */
   .awa-alibi-image {
     grid-column: 26 / 42;
+    grid-row: 2;
     width: 100%;
-    align-self: end;
+    align-self: start;
+    padding-top: calc(1 * var(--awa-row));
   }
 
   .awa-alibi-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* 72 Skimming image: 10 cols wide (half of Ferrari), 2-col left margin, 8 rows below Ferrari */
+  .awa-72skimming-image {
+    grid-column: 3 / 13;
+    grid-row: 2;
+    width: 100%;
+    align-self: start;
+    padding-top: calc(8 * var(--awa-row));
+  }
+
+  .awa-72skimming-image img {
     width: 100%;
     height: auto;
     display: block;
@@ -306,6 +323,20 @@
    col 17–43 : text        (27 cols)
    col 44–46 : right margin (3 cols)
 ──────────────────────────────────────────────────────────────────── */
+
+/* Blinking animation for preloader dot */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
 
 @media (max-width: 1023px) {
   .awa-section {
