@@ -26,9 +26,14 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
   const [videosLoaded, setVideosLoaded] = useState(false)
   const [minTimeElapsed, setMinTimeElapsed] = useState(false)
 
-  const firstLine = 'Same wind, unequal future.'
-  const secondLine = 'Unlock apparent wind.'
-  const fullText = firstLine + '\n' + secondLine
+  const part1 = 'Same wind'
+  const part2 = ', unequal future.'
+  const part3 = '\nUnlock apparent wind.'
+  const fullText = part1 + part2 + part3
+
+  // Pause points: after part1, after part1+part2
+  const pauseAfterPart1 = part1.length
+  const pauseAfterPart2 = part1.length + part2.length
 
   // Minimum 5 seconds duration
   useEffect(() => {
@@ -71,17 +76,15 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => clearTimeout(timeout)
   }, [])
 
-  // Typewriter animation
+  // Typewriter animation with syncope pauses
   useEffect(() => {
     let currentIndex = 0
     let isPaused = false
     
     const typeNextChar = () => {
       if (currentIndex < fullText.length) {
-        const nextChar = fullText[currentIndex]
-        
-        // Check if we just finished the first line (need to pause)
-        if (currentIndex === firstLine.length && !isPaused) {
+        // Check for pause points
+        if ((currentIndex === pauseAfterPart1 || currentIndex === pauseAfterPart2) && !isPaused) {
           isPaused = true
           setTimeout(() => {
             isPaused = false
@@ -108,7 +111,7 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     const startDelay = setTimeout(typeNextChar, 300)
     
     return () => clearTimeout(startDelay)
-  }, [fullText, firstLine.length])
+  }, [fullText, pauseAfterPart1, pauseAfterPart2])
 
   // Handle exit animation when videos are loaded, typing is complete, AND minimum time has elapsed
   useEffect(() => {
