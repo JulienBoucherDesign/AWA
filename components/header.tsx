@@ -36,7 +36,7 @@ export function Header() {
   return (
     <>
       <header
-        className="awa-header flex items-center justify-between py-8 lg:py-0"
+        className="awa-header flex items-center justify-between py-4 lg:py-0"
         style={{
           paddingLeft: "calc(2 / 42 * 100vw)",
           paddingRight: "calc(3 / 42 * 100vw)",
@@ -44,7 +44,7 @@ export function Header() {
       >
         <Link href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/awa-icon.png" alt="AWA" className="h-6 w-auto lg:h-5" />
+          <img src="/awa-icon.png" alt="AWA" className="h-3 w-auto lg:h-5" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -92,7 +92,7 @@ export function Header() {
           className="lg:hidden text-[#292929]"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          {menuOpen ? <X size={14} /> : <Menu size={14} />}
         </button>
       </header>
 
