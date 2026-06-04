@@ -6,7 +6,7 @@ interface PreloaderProps {
   onLoadComplete: () => void
 }
 
-// List of all videos to preload
+// List of all videos to preload (only valid files)
 const VIDEOS_TO_PRELOAD = [
   '/awa-video.webm',
   '/awa-video.mp4',
@@ -44,59 +44,43 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => clearTimeout(minDuration)
   }, [])
 
-  // Preload all videos using link preload elements for better caching
+  // Preload all videos using hidden video elements
   useEffect(() => {
     let isMounted = true
-    const preloadLinks: HTMLLinkElement[] = []
+    const videoElements: HTMLVideoElement[] = []
+    let loadedCount = 0
+    const totalVideos = VIDEOS_TO_PRELOAD.length
     
-    const preloadVideos = () => {
-      let loadedCount = 0
-      const totalVideos = VIDEOS_TO_PRELOAD.length
-      
-      const checkComplete = () => {
-        loadedCount++
-        if (loadedCount >= totalVideos && isMounted) {
-          setVideosLoaded(true)
-        }
+    const checkComplete = () => {
+      loadedCount++
+      if (loadedCount >= totalVideos && isMounted) {
+        setVideosLoaded(true)
       }
-
-      VIDEOS_TO_PRELOAD.forEach((src) => {
-        // Create link preload element
-        const link = document.createElement('link')
-        link.rel = 'preload'
-        link.as = 'video'
-        link.href = src
-        link.onload = checkComplete
-        link.onerror = checkComplete // Continue even if one fails
-        
-        document.head.appendChild(link)
-        preloadLinks.push(link)
-        
-        // Also create a hidden video element to force buffering
-        const video = document.createElement('video')
-        video.preload = 'auto'
-        video.muted = true
-        video.playsInline = true
-        video.style.display = 'none'
-        video.src = src
-        video.load()
-        document.body.appendChild(video)
-        
-        // Clean up video element after it's buffered
-        video.oncanplaythrough = () => {
-          video.remove()
-        }
-        video.onerror = () => {
-          video.remove()
-        }
-      })
     }
 
-    preloadVideos()
+    VIDEOS_TO_PRELOAD.forEach((src) => {
+      const video = document.createElement('video')
+      video.preload = 'auto'
+      video.muted = true
+      video.playsInline = true
+      video.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;'
+      video.src = src
+      
+      video.oncanplaythrough = () => {
+        checkComplete()
+      }
+      video.onerror = () => {
+        checkComplete() // Continue even if one fails
+      }
+      
+      document.body.appendChild(video)
+      videoElements.push(video)
+      video.load()
+    })
 
     // Fallback timeout in case videos take too long
     const timeout = setTimeout(() => {
-      if (isMounted && !videosLoaded) {
+      if (isMounted) {
         setVideosLoaded(true)
       }
     }, 15000) // 15 second max wait
@@ -104,8 +88,8 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => {
       isMounted = false
       clearTimeout(timeout)
-      // Clean up preload links
-      preloadLinks.forEach(link => link.remove())
+      // Clean up video elements
+      videoElements.forEach(video => video.remove())
     }
   }, [])
 
