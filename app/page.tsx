@@ -106,37 +106,8 @@ export default function Home() {
 
       </div>
 
-      {/* ── 72 SKIMMING SECTION ── */}
-      <div className="awa-section border-t border-[#e0e0e0] awa-gitana-section">
-        {/* Desktop: Full-page image */}
-        <div className="hidden lg:block awa-gitana-image">
-          <HoverVideoLink
-            imageSrc="/72-skimming-vignette.jpg"
-            videoSrcWebm="/72-skimming-flash.webm"
-            href="/apex/72-skimming-trimaran"
-            alt="72 Skimming Trimaran"
-          />
-          <div className="mt-2">
-            <p className="section-title text-xs tracking-[0.15em]">72 SKIMMING</p>
-          </div>
-        </div>
-
-        {/* Mobile: Full-width image */}
-        <div className="lg:hidden w-full px-4 py-6">
-          <HoverVideoLink
-            imageSrc="/72-skimming-vignette.jpg"
-            videoSrcWebm="/72-skimming-flash.webm"
-            href="/apex/72-skimming-trimaran"
-            alt="72 Skimming Trimaran"
-          />
-          <div className="mt-2">
-            <p className="section-title text-xs tracking-[0.15em]">72 SKIMMING</p>
-          </div>
-        </div>
-      </div>
-
       {/* ── GITANA SECTION ── */}
-      <div className="awa-section border-t border-[#e0e0e0] awa-gitana-section">
+      <div className="awa-section awa-gitana-section">
         {/* Desktop: Full-page image (cols 3-41, 2-col margins on each side) */}
         <div className="hidden lg:block awa-gitana-image">
           <HoverVideoLink
@@ -201,6 +172,17 @@ export default function Home() {
             <p className="section-title text-xs tracking-[0.15em]">ALIBI CATAMARANS</p>
           </div>
         </div>
+        <div className="hidden lg:block awa-72skimming-image">
+          <HoverVideoLink
+            imageSrc="/72-skimming-vignette.jpg"
+            videoSrcWebm="/72-skimming-flash.webm"
+            href="/apex/72-skimming-trimaran"
+            alt="72 Skimming Trimaran"
+          />
+          <div className="mt-2">
+            <p className="section-title text-xs tracking-[0.15em]">72 SKIMMING</p>
+          </div>
+        </div>
 
         {/* Mobile: Stacked images */}
         <div className="lg:hidden w-full px-4 py-6 space-y-6">
@@ -236,6 +218,17 @@ export default function Home() {
             />
             <div className="mt-2">
               <p className="section-title text-xs tracking-[0.15em]">ALIBI CATAMARANS</p>
+            </div>
+          </div>
+          <div>
+            <HoverVideoLink
+              imageSrc="/72-skimming-vignette.jpg"
+              videoSrcWebm="/72-skimming-flash.webm"
+              href="/apex/72-skimming-trimaran"
+              alt="72 Skimming Trimaran"
+            />
+            <div className="mt-2">
+              <p className="section-title text-xs tracking-[0.15em]">72 SKIMMING</p>
             </div>
           </div>
         </div>
