@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
 
 interface HoverVideoLinkProps {
   imageSrc: string
-  videoSrc: string
+  videoSrc?: string
   videoSrcWebm?: string
   href: string
   alt: string
@@ -16,8 +16,9 @@ export function HoverVideoLink({ imageSrc, videoSrc, videoSrcWebm, href, alt }: 
   const videoRef = useRef<HTMLVideoElement>(null)
   const router = useRouter()
   const touchStartTime = useRef<number>(0)
-  const isLongPress = useRef<boolean>(false)
-  const longPressThreshold = 200 // ms - anything longer than this is a long press
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null)
+  const isTouching = useRef<boolean>(false)
+  const longPressThreshold = 400 // ms - time before video starts playing
 
   const handleMouseEnter = () => {
     if (videoRef.current && !isPlaying) {
@@ -34,31 +35,43 @@ export function HoverVideoLink({ imageSrc, videoSrc, videoSrcWebm, href, alt }: 
     setIsPlaying(false)
   }
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const startVideo = () => {
+    if (videoRef.current && !isPlaying && isTouching.current) {
+      setIsPlaying(true)
+      videoRef.current.currentTime = 0
+      videoRef.current.play().catch(() => {
+        setIsPlaying(false)
+      })
+    }
+  }
+
+  const handleTouchStart = () => {
     touchStartTime.current = Date.now()
-    isLongPress.current = false
+    isTouching.current = true
     
-    // Start video after a short delay to detect long press
-    setTimeout(() => {
-      if (touchStartTime.current > 0) {
-        isLongPress.current = true
-        if (videoRef.current && !isPlaying) {
-          setIsPlaying(true)
-          videoRef.current.currentTime = 0
-          videoRef.current.play().catch(() => {
-            setIsPlaying(false)
-          })
-        }
-      }
+    // Clear any existing timer
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+    }
+    
+    // Start video after threshold, regardless of scroll
+    longPressTimer.current = setTimeout(() => {
+      startVideo()
     }, longPressThreshold)
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     const touchDuration = Date.now() - touchStartTime.current
-    touchStartTime.current = 0
+    isTouching.current = false
     
-    // If it was a quick tap (not a long press), navigate
-    if (touchDuration < longPressThreshold && !isLongPress.current) {
+    // Clear the timer
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+    
+    // If it was a quick tap (not a long press and video not playing), navigate
+    if (touchDuration < longPressThreshold && !isPlaying) {
       e.preventDefault()
       router.push(href)
     } else {
@@ -68,8 +81,28 @@ export function HoverVideoLink({ imageSrc, videoSrc, videoSrcWebm, href, alt }: 
       }
       setIsPlaying(false)
     }
-    isLongPress.current = false
   }
+
+  const handleTouchCancel = () => {
+    isTouching.current = false
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+    if (videoRef.current) {
+      videoRef.current.pause()
+    }
+    setIsPlaying(false)
+  }
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (longPressTimer.current) {
+        clearTimeout(longPressTimer.current)
+      }
+    }
+  }, [])
 
   const handleClick = (e: React.MouseEvent) => {
     // Only handle click on desktop (non-touch)
@@ -85,6 +118,7 @@ export function HoverVideoLink({ imageSrc, videoSrc, videoSrcWebm, href, alt }: 
       onClick={handleClick}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
     >
       {/* Image - visible when video is not playing */}
       <img
@@ -104,7 +138,7 @@ export function HoverVideoLink({ imageSrc, videoSrc, videoSrcWebm, href, alt }: 
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? "opacity-100" : "opacity-0"}`}
       >
         {videoSrcWebm && <source src={videoSrcWebm} type="video/webm" />}
-        <source src={videoSrc} type="video/mp4" />
+        {videoSrc && <source src={videoSrc} type="video/mp4" />}
       </video>
     </div>
   )

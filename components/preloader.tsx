@@ -44,37 +44,52 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => clearTimeout(minDuration)
   }, [])
 
-  // Preload all videos using fetch for better mobile support
+  // Preload all videos using link preload elements for better caching
   useEffect(() => {
     let isMounted = true
+    const preloadLinks: HTMLLinkElement[] = []
     
-    const preloadVideos = async () => {
-      const preloadPromises = VIDEOS_TO_PRELOAD.map(async (src) => {
-        try {
-          // Use fetch to actually download the video data
-          const response = await fetch(src, { 
-            method: 'GET',
-            cache: 'force-cache'
-          })
-          
-          if (response.ok) {
-            // Read the response to ensure it's fully downloaded
-            await response.blob()
-            console.log('[v0] Preloaded:', src)
-          }
-        } catch (error) {
-          console.log('[v0] Failed to preload:', src, error)
-          // Continue even if one video fails
+    const preloadVideos = () => {
+      let loadedCount = 0
+      const totalVideos = VIDEOS_TO_PRELOAD.length
+      
+      const checkComplete = () => {
+        loadedCount++
+        if (loadedCount >= totalVideos && isMounted) {
+          setVideosLoaded(true)
+        }
+      }
+
+      VIDEOS_TO_PRELOAD.forEach((src) => {
+        // Create link preload element
+        const link = document.createElement('link')
+        link.rel = 'preload'
+        link.as = 'video'
+        link.href = src
+        link.onload = checkComplete
+        link.onerror = checkComplete // Continue even if one fails
+        
+        document.head.appendChild(link)
+        preloadLinks.push(link)
+        
+        // Also create a hidden video element to force buffering
+        const video = document.createElement('video')
+        video.preload = 'auto'
+        video.muted = true
+        video.playsInline = true
+        video.style.display = 'none'
+        video.src = src
+        video.load()
+        document.body.appendChild(video)
+        
+        // Clean up video element after it's buffered
+        video.oncanplaythrough = () => {
+          video.remove()
+        }
+        video.onerror = () => {
+          video.remove()
         }
       })
-
-      // Wait for all videos to preload (or fail)
-      await Promise.allSettled(preloadPromises)
-      
-      if (isMounted) {
-        console.log('[v0] All videos preloaded')
-        setVideosLoaded(true)
-      }
     }
 
     preloadVideos()
@@ -82,7 +97,6 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     // Fallback timeout in case videos take too long
     const timeout = setTimeout(() => {
       if (isMounted && !videosLoaded) {
-        console.log('[v0] Preload timeout reached')
         setVideosLoaded(true)
       }
     }, 15000) // 15 second max wait
@@ -90,6 +104,8 @@ export function Preloader({ onLoadComplete }: PreloaderProps) {
     return () => {
       isMounted = false
       clearTimeout(timeout)
+      // Clean up preload links
+      preloadLinks.forEach(link => link.remove())
     }
   }, [])
 
