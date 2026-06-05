@@ -194,7 +194,7 @@ export default function Home() {
         <div className="hidden lg:block awa-72skimming-image">
           <HoverVideoLink
             imageSrc="/72-skimming-vignette.jpg"
-            videoSrcWebm="/72-skimming-flash.webm"
+            videoSrcWebm="https://jwwoqcifdjav2g9q.private.blob.vercel-storage.com/Flat_flash_hero_webm-1bC76Sqvhd2d3KP0IO98RhS7ZAIdfR.webm?vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfSndXb1FDSWZkSmFWMkc5USIsIm93bmVySWQiOiJ0ZWFtX3FQb0R1dGNWcWZHMkt6WEc2czUyUnhMaiIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgwNjkxMjIyODkzLCJpYXQiOjE3ODA2NDgwMzM2MTN9.iSh4_hmL_TKNvruH5vcrKuqJrt3tIj8c_P4aDTP0Wuo&vercel-blob-signature=yfgENlPN5zOJs4GmJF6WEaCrsYnPUIMzkYq3vqIEMA8"
             href="/apex/72-skimming-trimaran"
             alt="72 Skimming Trimaran"
           />
@@ -242,7 +242,7 @@ export default function Home() {
           <div>
             <HoverVideoLink
               imageSrc="/72-skimming-vignette.jpg"
-              videoSrcWebm="/72-skimming-flash.webm"
+              videoSrcWebm="https://jwwoqcifdjav2g9q.private.blob.vercel-storage.com/Flat_flash_hero_webm-1bC76Sqvhd2d3KP0IO98RhS7ZAIdfR.webm?vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfSndXb1FDSWZkSmFWMkc5USIsIm93bmVySWQiOiJ0ZWFtX3FQb0R1dGNWcWZHMkt6WEc2czUyUnhMaiIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgwNjkxMjIyODkzLCJpYXQiOjE3ODA2NDgwMzM2MTN9.iSh4_hmL_TKNvruH5vcrKuqJrt3tIj8c_P4aDTP0Wuo&vercel-blob-signature=yfgENlPN5zOJs4GmJF6WEaCrsYnPUIMzkYq3vqIEMA8"
               href="/apex/72-skimming-trimaran"
               alt="72 Skimming Trimaran"
             />
