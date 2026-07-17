@@ -177,6 +177,7 @@ export default function ServicesPage() {
       <ProsePage
         wide
         eyebrow="Services"
+        titleClassName="text-base lg:text-lg leading-snug"
         title="From first brief to launch, we deliver a complete range of design and engineering services. Our commitment doesn't end at the water's edge: we support every yacht throughout its life, with ongoing technical assistance and a level of follow-up that matches the standards to which she was built."
         intro={
           <>

@@ -11,6 +11,7 @@ export function ProsePage({
   backHref = "/about",
   backLabel = "About",
   wide = false,
+  titleClassName = "text-2xl lg:text-3xl",
 }: {
   eyebrow?: string
   title: string
@@ -19,6 +20,7 @@ export function ProsePage({
   backHref?: string
   backLabel?: string
   wide?: boolean
+  titleClassName?: string
 }) {
   return (
     <main className="min-h-screen bg-[#f5f5f5]">
@@ -32,7 +34,9 @@ export function ProsePage({
             </p>
           )}
 
-          <h1 className="text-[#292929] font-medium tracking-[0.12em] text-2xl lg:text-3xl mb-8">
+          <h1
+            className={`text-[#292929] font-medium tracking-[0.12em] mb-8 ${titleClassName}`}
+          >
             {title}
           </h1>
 
