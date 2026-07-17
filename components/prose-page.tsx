@@ -10,6 +10,7 @@ export function ProsePage({
   children,
   backHref = "/about",
   backLabel = "About",
+  wide = false,
 }: {
   eyebrow?: string
   title: string
@@ -17,13 +18,14 @@ export function ProsePage({
   children: ReactNode
   backHref?: string
   backLabel?: string
+  wide?: boolean
 }) {
   return (
     <main className="min-h-screen bg-[#f5f5f5]">
       <Header />
 
       <div className="px-8 lg:px-16 py-16 lg:py-24">
-        <div className="max-w-2xl mx-auto">
+        <div className={`${wide ? "max-w-3xl" : "max-w-2xl"} mx-auto`}>
           {eyebrow && (
             <p className="text-[10px] tracking-[0.3em] text-[#292929]/50 mb-3 uppercase">
               {eyebrow}
