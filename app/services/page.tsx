@@ -6,7 +6,6 @@ import { parts, allSections, totalServices } from "@/lib/services-data"
 import { SITE_URL, ORG } from "@/lib/site"
 
 const LAST_UPDATED = "2026-07-17"
-const LAST_UPDATED_LABEL = "July 2026"
 const PAGE_PATH = "/services"
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`
 
@@ -196,16 +195,8 @@ export default function ServicesPage() {
         }
       >
         <div className="flex flex-col">
-          {/* Freshness signal */}
-          <p className="text-[10px] tracking-[0.3em] text-[#292929]/40 uppercase">
-            Updated{" "}
-            <time dateTime={LAST_UPDATED}>{LAST_UPDATED_LABEL}</time>
-            {"  ·  "}
-            {totalServices} services
-          </p>
-
           {/* The three doors */}
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-px bg-[#292929]/10 border border-[#292929]/10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#292929]/10 border border-[#292929]/10">
             {doors.map((door) => (
               <a
                 key={door.href}
