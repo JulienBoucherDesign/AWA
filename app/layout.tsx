@@ -1,9 +1,14 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AWA - Apparent Wind Activities',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'AWA - Apparent Wind Activities',
+    template: '%s · AWA',
+  },
   description: 'Apparent Wind Activities - Race, Apex, Cruise, Services',
   generator: 'v0.app',
   icons: {
