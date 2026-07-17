@@ -177,7 +177,7 @@ export default function ServicesPage() {
       <ProsePage
         wide
         eyebrow="Services"
-        title="We design boats that fly. Then we teach you to fly them."
+        title="From first brief to launch, we deliver a complete range of design and engineering services. Our commitment doesn't end at the water's edge: we support every yacht throughout its life, with ongoing technical assistance and a level of follow-up that matches the standards to which she was built."
         intro={
           <>
             AWA is a naval architecture and design practice founded by Loïc
