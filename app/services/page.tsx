@@ -75,7 +75,7 @@ const faqs = [
   },
   {
     q: "Does AWA only design racing yachts?",
-    a: "No. Alongside offshore racers, AWA designs apex-performance private yachts, fast cruisers, foiling commercial vessels such as ferries, and products beyond sailing, applying the same race-derived engineering to each.",
+    a: "Racing is our pedigree — we were part of the team that conceived and designed Gitana 18 and Ferrari Hypersail. That same race-derived engineering now serves everything we draw: apex-performance private yachts, fast cruisers, and foiling commercial vessels.",
   },
   {
     q: "How many services does AWA offer?",

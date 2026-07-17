@@ -238,16 +238,6 @@ export const parts: Part[] = [
               "A like-for-like performance comparison of design options — keel, rig, foil, displacement — so choices are made on numbers, not opinion.",
           },
           {
-            name: "Race performance prediction (routing, weather polars)",
-            description:
-              "Combining polars with historical or forecast weather to predict elapsed times and route choices on a specific course or record.",
-          },
-          {
-            name: "Correlation campaign",
-            description:
-              "Measuring the real boat on the water and correlating it against prediction, so the models used for the next decision are trustworthy.",
-          },
-          {
             name: "Season performance analysis",
             description:
               "Reviewing a full season of data to find where the boat and crew actually gain or lose, and where to invest next.",
@@ -849,11 +839,6 @@ export const parts: Part[] = [
               "Tracking build milestones and logging non-conformities, so problems are caught and closed rather than buried.",
           },
           {
-            name: "Metrology & part acceptance",
-            description:
-              "Measuring critical parts against the design and formally accepting or rejecting them before they go into the boat.",
-          },
-          {
             name: "3D scan & as-built comparison",
             description:
               "3D scanning the real structure and comparing it to the design file to verify geometry the eye cannot check.",
@@ -945,16 +930,6 @@ export const parts: Part[] = [
             name: "Flag & registration",
             description:
               "Guiding flag choice and registration so the boat's paperwork matches how and where it will be used.",
-          },
-          {
-            name: "Commercial coding (charter, MCA)",
-            description:
-              "Meeting commercial coding requirements — charter, MCA — so the boat can legally earn money.",
-          },
-          {
-            name: "Safety file & safety plan",
-            description:
-              "Compiling the safety file and onboard safety plan that authorities and crew rely on.",
           },
           {
             name: "Insurability file",
@@ -1063,11 +1038,6 @@ export const parts: Part[] = [
             name: "Season programme",
             description:
               "Planning and supporting the owner's season, from event choice to logistics and technical readiness.",
-          },
-          {
-            name: "Captains' corps — training, certification, placement",
-            description:
-              "Training, certifying and placing captains who know these specific boats, so ownership does not depend on luck.",
           },
           {
             name: "Delivery & transport",
