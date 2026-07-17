@@ -180,11 +180,17 @@ export default function ServicesPage() {
         title="From first brief to launch, we deliver a complete range of design and engineering services. Our commitment doesn't end at the water's edge: we support every yacht throughout its life, with ongoing technical assistance and a level of follow-up that matches the standards to which she was built."
         intro={
           <>
-            AWA is a naval architecture and design practice founded by Loïc
-            Goepfert and Julien Boucher. This page is everything we do — {totalServices}{" "}
-            services across {allSections.length} disciplines, from the first
-            feasibility study to the captain who runs the boat after delivery.
-            It is long, because the work is.
+            Our expertise covers every discipline that shapes a yacht: naval
+            architecture and hydrodynamics, aerodynamics, appendages and flight,
+            structural engineering and composites, rig and sail development,
+            systems and energy, interior and exterior design. This breadth
+            allows us to take a project from feasibility study and concept
+            through detailed engineering, production drawings and yard
+            supervision, to sea trials, commissioning and tuning. And because a
+            yacht&apos;s story doesn&apos;t end at launch, we stay involved —
+            performance analysis, refits and between-season optimisation,
+            telemetry and predictive maintenance, crew training, and a direct
+            line to the engineers who designed her.
           </>
         }
       >
